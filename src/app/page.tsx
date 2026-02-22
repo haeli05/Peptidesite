@@ -8,16 +8,16 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Separator } from "@/components/ui/separator";
 import { useState, useEffect } from "react";
 
-function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+function CountdownBanner() {
+  const [timeLeft, setTimeLeft] = useState({ days: 2, hours: 6, minutes: 33, seconds: 24 });
 
   useEffect(() => {
-    const endDate = new Date();
-    endDate.setDate(endDate.getDate() + 7);
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 3);
     
     const timer = setInterval(() => {
       const now = new Date();
-      const diff = endDate.getTime() - now.getTime();
+      const diff = targetDate.getTime() - now.getTime();
       
       if (diff > 0) {
         setTimeLeft({
@@ -33,68 +33,54 @@ function CountdownTimer() {
   }, []);
 
   return (
-    <div className="flex justify-center gap-2 md:gap-4 mb-4">
-      <div className="text-center">
-        <div className="bg-[#EF4049] text-white text-xl md:text-2xl font-bold px-3 py-2 rounded" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-          {String(timeLeft.days).padStart(2, '0')}
-        </div>
-        <span className="text-xs text-[#444444] mt-1 block">Days</span>
-      </div>
-      <div className="text-center">
-        <div className="bg-[#EF4049] text-white text-xl md:text-2xl font-bold px-3 py-2 rounded" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-          {String(timeLeft.hours).padStart(2, '0')}
-        </div>
-        <span className="text-xs text-[#444444] mt-1 block">Hours</span>
-      </div>
-      <div className="text-center">
-        <div className="bg-[#EF4049] text-white text-xl md:text-2xl font-bold px-3 py-2 rounded" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-          {String(timeLeft.minutes).padStart(2, '0')}
-        </div>
-        <span className="text-xs text-[#444444] mt-1 block">Minutes</span>
-      </div>
-      <div className="text-center">
-        <div className="bg-[#EF4049] text-white text-xl md:text-2xl font-bold px-3 py-2 rounded" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-          {String(timeLeft.seconds).padStart(2, '0')}
-        </div>
-        <span className="text-xs text-[#444444] mt-1 block">Seconds</span>
-      </div>
-    </div>
+    <span className="inline-flex gap-1">
+      <span>{String(timeLeft.days).padStart(2, '0')}</span>
+      <span>Days</span>
+      <span>{String(timeLeft.hours).padStart(2, '0')}</span>
+      <span>Hours</span>
+      <span>{String(timeLeft.minutes).padStart(2, '0')}</span>
+      <span>Min</span>
+      <span>{String(timeLeft.seconds).padStart(2, '0')}</span>
+      <span>Sec</span>
+    </span>
   );
 }
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
+      {/* Top Banner */}
+      <div className="bg-[#444444] text-white py-3">
+        <div className="container mx-auto px-4 flex flex-wrap items-center justify-center gap-4">
+          <Link href="/flat-pricing" className="font-bold hover:text-[#FFDD00]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+            40% OFF - SALE ENDS IN:
+          </Link>
+          <div className="flex items-center gap-2">
+            <div className="bg-[#EF4049] text-white font-bold px-2 py-1 rounded text-sm" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+              <CountdownBanner />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Hero Section - Matching refills.com */}
       <section className="relative bg-gradient-to-b from-[#333333] to-[#444444] py-20 md:py-32">
         <div className="container mx-auto px-4 text-center">
-          <Badge variant="secondary" className="mb-2 bg-[#FFDD00] text-[#444444] hover:bg-[#FFDD00]/80 text-sm font-bold px-4 py-1" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-            40% OFF - SALE ENDS IN:
-          </Badge>
-          <CountdownTimer />
+          <div className="mb-6">
+            <span className="text-[#FFDD00] text-sm font-bold tracking-wider" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+              DOCTOR-TRUSTED CARE, PERSONALIZED FOR YOU
+            </span>
+          </div>
           
           <Link href="/">
             <div className="flex justify-center mb-6">
               <span className="text-5xl md:text-7xl font-bold text-[#FFDD00]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>GOLD'S HEALTH</span>
             </div>
           </Link>
-          
-          {/* Navigation Categories - inline style like refills */}
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-8">
-            <Link href="/weight-loss" className="text-white font-medium hover:text-[#FFDD00] font-semibold text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Weight Loss</Link>
-            <Link href="/sexual-health" className="text-white font-medium hover:text-[#FFDD00] font-semibold text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Better Intimacy</Link>
-            <Link href="/daily-health" className="text-white font-medium hover:text-[#FFDD00] font-semibold text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Daily Health</Link>
-            <Link href="/hair" className="text-white font-medium hover:text-[#FFDD00] font-semibold text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Hair Growth</Link>
-            <Link href="/how-it-works" className="text-white font-medium hover:text-[#FFDD00] font-semibold text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>How It Works</Link>
-            <Link href="/login" className="text-white font-medium hover:text-[#FFDD00] font-semibold text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Login</Link>
-          </div>
 
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-            Doctor-Trusted Care, Personalized for You
-          </h1>
-          <h2 className="text-3xl md:text-5xl font-bold text-[#FFDD00] mb-6" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
             Personalized GLP-1's <span className="text-[#EF4049]">40% Off</span> Sale
-          </h2>
+          </h1>
           <p className="text-xl md:text-2xl text-white mb-2 max-w-2xl mx-auto" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
             Premium Prescriptions <strong>At The Lowest Prices</strong>
           </p>
