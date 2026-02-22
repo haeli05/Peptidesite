@@ -54,29 +54,29 @@ export function Header() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-[#444444]/95 backdrop-blur supports-[backdrop-filter]:bg-[#444444]/90">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold text-emerald-600">PeptideSite</span>
+          <span className="text-2xl font-bold text-[#FFDD00] tracking-wide" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>GOLD'S HEALTH</span>
         </Link>
 
         <div className="hidden md:flex">
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className={isActive("/weight-loss") ? "text-emerald-600" : ""}>
-                  Weight Loss
+                <NavigationMenuTrigger className={isActive("/weight-loss") ? "text-[#FFDD00]" : "text-white bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-[#FFDD00]"}>
+                  <span className="text-white hover:text-[#FFDD00] data-[state=open]:text-[#FFDD00]">Weight Loss</span>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
                         <a
-                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-emerald-50 to-emerald-100 p-6 no-underline outline-none focus:shadow-md"
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-[#FFDD00] to-[#FFD700] p-6 no-underline outline-none focus:shadow-md"
                           href="/weight-loss"
                         >
-                          <span className="mb-2 text-lg font-semibold">Weight Loss</span>
-                          <p className="text-sm leading-tight text-muted-foreground">
+                          <span className="mb-2 text-lg font-semibold text-[#444444]">Weight Loss</span>
+                          <p className="text-sm leading-tight text-[#444444]/80">
                             Achieve your weight loss goals with personalized GLP-1 treatments.
                           </p>
                         </a>
@@ -92,8 +92,8 @@ export function Header() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className={isActive("/sexual-health") ? "text-emerald-600" : ""}>
-                  Better Intimacy
+                <NavigationMenuTrigger className="data-[state=open]:text-[#FFDD00]">
+                  <span className="text-white hover:text-[#FFDD00]">Better Intimacy</span>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4">
@@ -107,8 +107,8 @@ export function Header() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className={isActive("/daily-health") ? "text-emerald-600" : ""}>
-                  Daily Health
+                <NavigationMenuTrigger className="data-[state=open]:text-[#FFDD00]">
+                  <span className="text-white hover:text-[#FFDD00]">Daily Health</span>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4">
@@ -122,8 +122,8 @@ export function Header() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className={isActive("/hair") ? "text-emerald-600" : ""}>
-                  Hair Growth
+                <NavigationMenuTrigger className="data-[state=open]:text-[#FFDD00]">
+                  <span className="text-white hover:text-[#FFDD00]">Hair Growth</span>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4">
@@ -138,7 +138,7 @@ export function Header() {
 
               <NavigationMenuItem>
                 <Link href="/how-it-works" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <NavigationMenuLink className="text-white hover:text-[#FFDD00]">
                     How It Works
                   </NavigationMenuLink>
                 </Link>
@@ -148,35 +148,35 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Link href="/login" className="hidden text-sm font-medium hover:text-emerald-600 sm:block">
+          <Link href="/login" className="hidden text-sm font-medium text-white hover:text-[#FFDD00] sm:block">
             Login
           </Link>
-          <Button className="bg-emerald-600 hover:bg-emerald-700">Get Started</Button>
+          <Button className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] font-semibold">Get Started</Button>
           
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="text-white">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right">
+            <SheetContent side="right" className="bg-[#444444]">
               <nav className="flex flex-col gap-4 mt-8">
-                <Link href="/weight-loss" className="text-lg font-medium" onClick={() => setIsOpen(false)}>
+                <Link href="/weight-loss" className="text-lg font-medium text-white hover:text-[#FFDD00]" onClick={() => setIsOpen(false)}>
                   Weight Loss
                 </Link>
-                <Link href="/sexual-health" className="text-lg font-medium" onClick={() => setIsOpen(false)}>
+                <Link href="/sexual-health" className="text-lg font-medium text-white hover:text-[#FFDD00]" onClick={() => setIsOpen(false)}>
                   Better Intimacy
                 </Link>
-                <Link href="/daily-health" className="text-lg font-medium" onClick={() => setIsOpen(false)}>
+                <Link href="/daily-health" className="text-lg font-medium text-white hover:text-[#FFDD00]" onClick={() => setIsOpen(false)}>
                   Daily Health
                 </Link>
-                <Link href="/hair" className="text-lg font-medium" onClick={() => setIsOpen(false)}>
+                <Link href="/hair" className="text-lg font-medium text-white hover:text-[#FFDD00]" onClick={() => setIsOpen(false)}>
                   Hair Growth
                 </Link>
-                <Link href="/how-it-works" className="text-lg font-medium" onClick={() => setIsOpen(false)}>
+                <Link href="/how-it-works" className="text-lg font-medium text-white hover:text-[#FFDD00]" onClick={() => setIsOpen(false)}>
                   How It Works
                 </Link>
-                <Link href="/login" className="text-lg font-medium" onClick={() => setIsOpen(false)}>
+                <Link href="/login" className="text-lg font-medium text-white hover:text-[#FFDD00]" onClick={() => setIsOpen(false)}>
                   Login
                 </Link>
               </nav>
@@ -198,7 +198,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#FFDD00] hover:text-[#444444] focus:bg-[#FFDD00] focus:text-[#444444]",
             className
           )}
           {...props}
