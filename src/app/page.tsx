@@ -1,305 +1,220 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
+import { useState, useEffect } from "react";
+
+function CountdownTimer() {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate() + 7);
+    
+    const timer = setInterval(() => {
+      const now = new Date();
+      const diff = endDate.getTime() - now.getTime();
+      
+      if (diff > 0) {
+        setTimeLeft({
+          days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((diff / (1000 * 60)) % 60),
+          seconds: Math.floor((diff / 1000) % 60),
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="flex justify-center gap-2 md:gap-4 mb-4">
+      <div className="text-center">
+        <div className="bg-[#EF4049] text-white text-xl md:text-2xl font-bold px-3 py-2 rounded" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+          {String(timeLeft.days).padStart(2, '0')}
+        </div>
+        <span className="text-xs text-[#444444] mt-1 block">Days</span>
+      </div>
+      <div className="text-center">
+        <div className="bg-[#EF4049] text-white text-xl md:text-2xl font-bold px-3 py-2 rounded" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+          {String(timeLeft.hours).padStart(2, '0')}
+        </div>
+        <span className="text-xs text-[#444444] mt-1 block">Hours</span>
+      </div>
+      <div className="text-center">
+        <div className="bg-[#EF4049] text-white text-xl md:text-2xl font-bold px-3 py-2 rounded" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+          {String(timeLeft.minutes).padStart(2, '0')}
+        </div>
+        <span className="text-xs text-[#444444] mt-1 block">Minutes</span>
+      </div>
+      <div className="text-center">
+        <div className="bg-[#EF4049] text-white text-xl md:text-2xl font-bold px-3 py-2 rounded" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+          {String(timeLeft.seconds).padStart(2, '0')}
+        </div>
+        <span className="text-xs text-[#444444] mt-1 block">Seconds</span>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
-      {/* Hero Section - Gold's Gym Styling */}
-      <section className="relative bg-gradient-to-b from-[#FFFEF0] to-white py-20 md:py-32" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+      {/* Hero Section - Matching refills.com */}
+      <section className="relative bg-gradient-to-b from-[#333333] to-[#444444] py-20 md:py-32">
         <div className="container mx-auto px-4 text-center">
-          <Badge variant="secondary" className="mb-4 bg-[#EF4049]/10 text-[#EF4049] hover:bg-[#EF4049]/20 text-sm font-semibold px-4 py-1">
-            40% OFF - Sale Ends In: 00 Days 00 Hours 00 Minutes 00 Seconds
+          <Badge variant="secondary" className="mb-2 bg-[#FFDD00] text-[#444444] hover:bg-[#FFDD00]/80 text-sm font-bold px-4 py-1" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+            40% OFF - SALE ENDS IN:
           </Badge>
+          <CountdownTimer />
+          
           <Link href="/">
             <div className="flex justify-center mb-6">
               <span className="text-5xl md:text-7xl font-bold text-[#FFDD00]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>GOLD'S HEALTH</span>
             </div>
           </Link>
           
-          {/* Navigation Categories */}
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Link href="/weight-loss" className="text-[#444444] font-medium hover:text-[#FFDD00] font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Weight Loss</Link>
-            <Link href="/sexual-health" className="text-[#444444] font-medium hover:text-[#FFDD00] font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Better Intimacy</Link>
-            <Link href="/daily-health" className="text-[#444444] font-medium hover:text-[#FFDD00] font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Daily Health</Link>
-            <Link href="/hair" className="text-[#444444] font-medium hover:text-[#FFDD00] font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Hair Growth</Link>
-            <Link href="/how-it-works" className="text-[#444444] font-medium hover:text-[#FFDD00] font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>How It Works</Link>
-            <Link href="/login" className="text-[#444444] font-medium hover:text-[#FFDD00] font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Login</Link>
+          {/* Navigation Categories - inline style like refills */}
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-8">
+            <Link href="/weight-loss" className="text-white font-medium hover:text-[#FFDD00] font-semibold text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Weight Loss</Link>
+            <Link href="/sexual-health" className="text-white font-medium hover:text-[#FFDD00] font-semibold text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Better Intimacy</Link>
+            <Link href="/daily-health" className="text-white font-medium hover:text-[#FFDD00] font-semibold text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Daily Health</Link>
+            <Link href="/hair" className="text-white font-medium hover:text-[#FFDD00] font-semibold text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Hair Growth</Link>
+            <Link href="/how-it-works" className="text-white font-medium hover:text-[#FFDD00] font-semibold text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>How It Works</Link>
+            <Link href="/login" className="text-white font-medium hover:text-[#FFDD00] font-semibold text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Login</Link>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-bold text-[#444444] mb-6" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-            Doctor-Trusted Care, <br className="hidden md:block" />
-            Personalized for You
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+            Doctor-Trusted Care, Personalized for You
           </h1>
           <h2 className="text-3xl md:text-5xl font-bold text-[#FFDD00] mb-6" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-            Personalized GLP-1's <br />
-            <span className="text-[#EF4049]">40% Off</span> Sale
+            Personalized GLP-1's <span className="text-[#EF4049]">40% Off</span> Sale
           </h2>
-          <p className="text-xl md:text-2xl text-[#444444] mb-8 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-white mb-2 max-w-2xl mx-auto" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
             Premium Prescriptions <strong>At The Lowest Prices</strong>
           </p>
-          <p className="text-lg text-[#444444] mb-2">
+          <p className="text-lg text-white/80 mb-2">
             GLP-1s from $4/day, delivered fast
           </p>
-          <p className="text-[#444444]/60 mb-8">Free Shipping</p>
+          <p className="text-white/60 mb-8">Free Shipping</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] text-lg px-8 font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+            <Button size="lg" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] text-lg px-8 font-bold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
               Get Started
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-16 bg-white">
+      {/* Categories Section - Larger cards like refills */}
+      <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-6">
-            <Link href="/weight-loss">
-              <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full border-0 shadow-none">
-                <CardHeader>
-                  <CardTitle className="text-xl text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Weight Loss</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">Achieve your weight loss goals</p>
-                  <p className="text-sm text-[#FFDD00] mt-2 font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>View All Weight Loss Products →</p>
-                </CardContent>
-              </Card>
+            <Link href="/weight-loss" className="group">
+              <div className="border-2 border-transparent hover:border-[#FFDD00] rounded-lg p-6 transition-all bg-gradient-to-br from-[#FFFEF0] to-white">
+                <CardTitle className="text-2xl text-[#444444] group-hover:text-[#FFDD00] transition-colors" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Weight Loss</CardTitle>
+                <p className="text-muted-foreground mt-2">Achieve your weight loss goals</p>
+                <p className="text-sm text-[#FFDD00] mt-3 font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>View All Weight Loss Products →</p>
+              </div>
             </Link>
-            <Link href="/sexual-health">
-              <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full border-0 shadow-none">
-                <CardHeader>
-                  <CardTitle className="text-xl text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Better Intimacy</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">Gain Confidence and Last Longer</p>
-                  <p className="text-sm text-[#FFDD00] mt-2 font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>View All Better Intimacy Products →</p>
-                </CardContent>
-              </Card>
+            <Link href="/sexual-health" className="group">
+              <div className="border-2 border-transparent hover:border-[#FFDD00] rounded-lg p-6 transition-all bg-gradient-to-br from-[#FFFEF0] to-white">
+                <CardTitle className="text-2xl text-[#444444] group-hover:text-[#FFDD00] transition-colors" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Better Intimacy</CardTitle>
+                <p className="text-muted-foreground mt-2">Gain Confidence and Last Longer</p>
+                <p className="text-sm text-[#FFDD00] mt-3 font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>View All Better Intimacy Products →</p>
+              </div>
             </Link>
-            <Link href="/daily-health">
-              <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full border-0 shadow-none">
-                <CardHeader>
-                  <CardTitle className="text-xl text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Daily Health</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">Become the Best version of yourself</p>
-                  <p className="text-sm text-[#FFDD00] mt-2 font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>View All Daily Health Products →</p>
-                </CardContent>
-              </Card>
+            <Link href="/daily-health" className="group">
+              <div className="border-2 border-transparent hover:border-[#FFDD00] rounded-lg p-6 transition-all bg-gradient-to-br from-[#FFFEF0] to-white">
+                <CardTitle className="text-2xl text-[#444444] group-hover:text-[#FFDD00] transition-colors" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Daily Health</CardTitle>
+                <p className="text-muted-foreground mt-2">Become the Best version of yourself</p>
+                <p className="text-sm text-[#FFDD00] mt-3 font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>View All Daily Health Products →</p>
+              </div>
             </Link>
-            <Link href="/hair">
-              <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full border-0 shadow-none">
-                <CardHeader>
-                  <CardTitle className="text-xl text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Hair Growth</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">Lasting solutions for fuller hair</p>
-                  <p className="text-sm text-[#FFDD00] mt-2 font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>View All Hair Growth Products →</p>
-                </CardContent>
-              </Card>
+            <Link href="/hair" className="group">
+              <div className="border-2 border-transparent hover:border-[#FFDD00] rounded-lg p-6 transition-all bg-gradient-to-br from-[#FFFEF0] to-white">
+                <CardTitle className="text-2xl text-[#444444] group-hover:text-[#FFDD00] transition-colors" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Hair Growth</CardTitle>
+                <p className="text-muted-foreground mt-2">Lasting solutions for fuller hair</p>
+                <p className="text-sm text-[#FFDD00] mt-3 font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>View All Hair Growth Products →</p>
+              </div>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Features Bar */}
-      <section className="py-8 bg-[#444444] border-y">
+      {/* Features Bar - Dark like refills */}
+      <section className="py-6 bg-[#333333]">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-center">
-            <div>
-              <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>FDA-Regulated Pharmacies</p>
-            </div>
-            <div>
-              <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>100% Online Process</p>
-            </div>
-            <div>
-              <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Free & Discreet Shipping</p>
-            </div>
-            <div>
-              <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Affordable Pricing</p>
-            </div>
-            <div>
-              <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>No Hidden Fees</p>
-            </div>
-            <div>
-              <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Board Certified Physicians</p>
-            </div>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-center">
+            <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>FDA-REGULATED PHARMACIES</p>
+            <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>100% ONLINE PROCESS</p>
+            <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>FREE & DISCREET SHIPPING</p>
+            <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>AFFORDABLE PRICING</p>
+            <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>NO HIDDEN FEES</p>
+            <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>BOARD CERTIFIED PHYSICIANS</p>
           </div>
         </div>
       </section>
 
-      {/* Products Section */}
+      {/* Products Section - Better layout */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Featured Products</h2>
           <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <ProductCard
-              category="Weight Loss"
-              name="Personalized GLP-1"
-              type="Injectable"
-              badge="40% OFF"
-              inStock={true}
-            />
-            <ProductCard
-              category="Weight Loss"
-              name="Ozempic"
-              type="Injectable"
-              inStock={true}
-            />
-            <ProductCard
-              category="Weight Loss"
-              name="Zepbound"
-              type="Injectable"
-              inStock={true}
-            />
-            <ProductCard
-              category="Weight Loss"
-              name="Wegovy"
-              type="Injectable"
-              inStock={true}
-            />
-            <ProductCard
-              category="Weight Loss"
-              name="Saxenda"
-              type="Injectable"
-              inStock={true}
-            />
-            <ProductCard
-              category="Better Intimacy"
-              name="Tadalafil"
-              type="Pill"
-              inStock={true}
-            />
-            <ProductCard
-              category="Better Intimacy"
-              name="Sildenafil"
-              type="Pill"
-              inStock={true}
-            />
-            <ProductCard
-              category="Better Intimacy"
-              name="Cialis"
-              type="Pill"
-              inStock={true}
-            />
-            <ProductCard
-              category="Better Intimacy"
-              name="Viagra"
-              type="Pill"
-              inStock={true}
-            />
-            <ProductCard
-              category="Daily Health"
-              name="NAD+"
-              type="Injectable"
-              inStock={true}
-            />
-            <ProductCard
-              category="Daily Health"
-              name="Sermorelin"
-              type="Injectable"
-              inStock={true}
-            />
-            <ProductCard
-              category="Daily Health"
-              name="Methylene Blue"
-              type="Pill"
-              inStock={true}
-            />
-            <ProductCard
-              category="Hair"
-              name="Finasteride"
-              type="Pill"
-              inStock={true}
-            />
-            <ProductCard
-              category="Hair"
-              name="Oral Minoxidil"
-              type="Pill"
-              inStock={true}
-            />
-            <ProductCard
-              category="Hair"
-              name="Finasteride & Minoxidil Spray"
-              type="Spray"
-              inStock={true}
-            />
+            <ProductCard category="Weight Loss" name="Personalized GLP-1" type="Injectable" badge="40% OFF" inStock={true} />
+            <ProductCard category="Weight Loss" name="Ozempic" type="Injectable" inStock={true} />
+            <ProductCard category="Weight Loss" name="Zepbound" type="Injectable" inStock={true} />
+            <ProductCard category="Weight Loss" name="Wegovy" type="Injectable" inStock={true} />
+            <ProductCard category="Weight Loss" name="Saxenda" type="Injectable" inStock={true} />
+            <ProductCard category="Better Intimacy" name="Tadalafil" type="Pill" inStock={true} />
+            <ProductCard category="Better Intimacy" name="Sildenafil" type="Pill" inStock={true} />
+            <ProductCard category="Better Intimacy" name="Cialis" type="Pill" inStock={true} />
+            <ProductCard category="Better Intimacy" name="Viagra" type="Pill" inStock={true} />
+            <ProductCard category="Daily Health" name="NAD+" type="Injectable" inStock={true} />
+            <ProductCard category="Daily Health" name="Sermorelin" type="Injectable" inStock={true} />
+            <ProductCard category="Daily Health" name="Methylene Blue" type="Pill" inStock={true} />
+            <ProductCard category="Hair" name="Finasteride" type="Pill" inStock={true} />
+            <ProductCard category="Hair" name="Oral Minoxidil" type="Pill" inStock={true} />
+            <ProductCard category="Hair" name="Finasteride & Minoxidil Spray" type="Spray" inStock={true} />
           </div>
         </div>
       </section>
 
-      {/* Benefits Section - Gold's Gym Dark */}
-      <section className="py-16 bg-[#444444] text-white">
+      {/* Benefits Section */}
+      <section className="py-16 bg-[#333333] text-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4 text-[#FFDD00]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Personalized For You</h2>
-          <p className="text-center text-white/80 mb-12" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>40% OFF</p>
+          <h2 className="text-3xl font-bold text-center mb-4 text-[#FFDD00]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>PERSONALIZED FOR YOU</h2>
+          <p className="text-center text-white/80 mb-12 text-xl" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>40% OFF</p>
           <div className="grid md:grid-cols-3 gap-8">
-            <BenefitCard
-              title="Clinically Prescribed By Licensed Professionals"
-              description="Free care and support from licensed providers nationwide."
-            />
-            <BenefitCard
-              title="20% Weight Loss In One Year"
-              description="Proven results with our personalized programs."
-            />
-            <BenefitCard
-              title="Never Pay for Monthly Memberships or App Fees"
-              description="Transparent pricing with no hidden costs."
-            />
-            <BenefitCard
-              title="All Dosages at the Same Low Price"
-              description="We don't charge you based on dosage changes."
-            />
-            <BenefitCard
-              title="Free & Fast Shipping"
-              description="Discreetly shipped to your front door quickly."
-            />
-            <BenefitCard
-              title="Free 24/7 Support with our Health Concierge"
-              description="Manage all your goals and prescriptions in one place."
-            />
+            <BenefitCard title="Clinically Prescribed By Licensed Professionals" description="Free care and support from licensed providers nationwide." />
+            <BenefitCard title="20% Weight Loss In One Year" description="Proven results with our personalized programs." />
+            <BenefitCard title="Never Pay for Monthly Memberships or App Fees" description="Transparent pricing with no hidden costs." />
+            <BenefitCard title="All Dosages at the Same Low Price" description="We don't charge you based on dosage changes." />
+            <BenefitCard title="Free & Fast Shipping" description="Discreetly shipped to your front door quickly." />
+            <BenefitCard title="Free 24/7 Support with our Health Concierge" description="Manage all your goals and prescriptions in one place." />
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section - 10 like refills */}
       <section className="py-16 bg-[#FFFEF0]">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Hear From Gold's Health Customers</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <TestimonialCard
-              quote="Gold's Health helped me get my energy back — I feel sharper, stronger, and finally excited to take on each day."
-              name="Antonia"
-              result="Lost 50 Pounds"
-            />
-            <TestimonialCard
-              quote="Thanks to Gold's Health, I'm sleeping better, moving easier, and feeling like myself again."
-              name="Jacob"
-              result="Lost 80 Pounds"
-            />
-            <TestimonialCard
-              quote="Gold's Health changed my relationship with food — no crash diets, no guilt, just steady, real progress."
-              name="Mireya"
-              result="Lost 52 Pounds"
-            />
-            <TestimonialCard
-              quote="I never thought I could stick to something — Gold's Health made it easy and sustainable."
-              name="Cindy"
-              result="Lost 120 Pounds"
-            />
-            <TestimonialCard
-              quote="My clothes fit better, my joints don't ache anymore, and I actually look forward to being active!"
-              name="Illiana"
-              result="Lost 40 Pounds"
-            />
-            <TestimonialCard
-              quote="I lost 75 pounds with Gold's Health and gained so much more — confidence, freedom, and better health."
-              name="Robert"
-              result="Lost 75 Pounds"
-            />
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>HEAR FROM GOLD'S HEALTH CUSTOMERS</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <TestimonialCard quote="Gold's Health helped me get my energy back — I feel sharper, stronger, and finally excited to take on each day." name="Antonia" result="Lost 50 Pounds" />
+            <TestimonialCard quote="Thanks to Gold's Health, I'm sleeping better, moving easier, and feeling like myself again." name="Jacob" result="Lost 80 Pounds" />
+            <TestimonialCard quote="Gold's Health changed my relationship with food — no crash diets, no guilt, just steady, real progress." name="Mireya" result="Lost 52 Pounds" />
+            <TestimonialCard quote="I never thought I could stick to something — Gold's Health made it easy and sustainable." name="Cindy" result="Lost 120 Pounds" />
+            <TestimonialCard quote="My clothes fit better, my joints don't ache anymore, and I actually look forward to being active!" name="Illiana" result="Lost 40 Pounds" />
+            <TestimonialCard quote="I lost 75 pounds with Gold's Health and gained so much more — confidence, freedom, and better health." name="Robert" result="Lost 75 Pounds" />
+            <TestimonialCard quote="My blood pressure dropped, my stress went down, and my energy shot up — all thanks to Gold's Health." name="Hannah" result="Lost 70 Pounds" />
+            <TestimonialCard quote="I used to feel stuck — now, with Gold's Health, my health is moving in the right direction every single day." name="Mary" result="Lost 40 Pounds" />
+            <TestimonialCard quote="I'm not winded after climbing stairs anymore. That alone is worth everything Gold's Health helped me achieve." name="Daryl" result="Lost 72 Pounds" />
+            <TestimonialCard quote="Every part of my life has improved — sleep, mood, energy. Gold's Health made the difference." name="Sarah" result="Lost 40 Pounds" />
           </div>
         </div>
       </section>
@@ -307,11 +222,11 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-b from-white to-[#FFFEF0]">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6 text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Ready to Get Started?</h2>
+          <h2 className="text-3xl font-bold mb-6 text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>READY TO GET STARTED?</h2>
           <p className="text-lg text-[#444444]/80 mb-8 max-w-2xl mx-auto">
             Take the first step towards your health goals today. Our team is ready to help you succeed.
           </p>
-          <Button size="lg" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] text-lg px-8 font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+          <Button size="lg" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] text-lg px-8 font-bold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
             Get Started
           </Button>
         </div>
@@ -320,7 +235,7 @@ export default function Home() {
       {/* FAQ Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Gold's Health Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>GOLD'S HEALTH FREQUENTLY ASKED QUESTIONS</h2>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
               <AccordionTrigger className="text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>What is Gold's Health, and how does it work?</AccordionTrigger>
@@ -362,17 +277,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-[#444444] text-white py-12">
+      {/* FDA Disclaimer */}
+      <section className="py-8 bg-[#FFFEF0] border-t">
+        <div className="container mx-auto px-4 max-w-4xl text-center">
+          <p className="text-xs text-[#444444]/60">
+            <strong>Disclaimer:</strong> Gold's Health offers compounded GLP-1s exclusively from U.S. pharmacies. While these pharmacies are highly regulated, the FDA has not evaluated the medications for safety, quality, or efficacy. Compounded drug products are not approved or evaluated for safety, effectiveness, or quality by the FDA. Prescription required.
+          </p>
+        </div>
+      </section>
+
+      {/* Footer with Newsletter */}
+      <footer className="bg-[#333333] text-white py-12">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="text-xl font-bold mb-4 text-[#FFDD00]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>GOLD'S HEALTH</h3>
-              <p className="text-white/80">Premium Prescriptions at The Lowest Prices</p>
+              <h3 className="text-2xl font-bold mb-4 text-[#FFDD00]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>GOLD'S HEALTH</h3>
+              <p className="text-white/80 text-sm mb-4">Premium Prescriptions at The Lowest Prices</p>
+              {/* Newsletter Signup */}
+              <div>
+                <p className="text-sm font-semibold mb-2" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>SUBSCRIBE FOR OUR NEWSLETTER</p>
+                <div className="flex gap-2">
+                  <input 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded text-sm text-white placeholder:text-white/40"
+                  />
+                  <Button className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] font-bold px-4" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+                    →
+                  </Button>
+                </div>
+              </div>
             </div>
             <div>
-              <h4 className="font-semibold mb-4" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Products</h4>
-              <ul className="space-y-2 text-white/80">
+              <h4 className="font-semibold mb-4" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>PRODUCTS</h4>
+              <ul className="space-y-2 text-white/80 text-sm">
                 <li><Link href="/weight-loss" className="hover:text-[#FFDD00]">Weight Loss</Link></li>
                 <li><Link href="/daily-health" className="hover:text-[#FFDD00]">Daily Health</Link></li>
                 <li><Link href="/hair" className="hover:text-[#FFDD00]">Hair Growth</Link></li>
@@ -380,8 +318,8 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Company & Terms</h4>
-              <ul className="space-y-2 text-white/80">
+              <h4 className="font-semibold mb-4" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>COMPANY & TERMS</h4>
+              <ul className="space-y-2 text-white/80 text-sm">
                 <li><Link href="/about" className="hover:text-[#FFDD00]">About</Link></li>
                 <li><Link href="/faq" className="hover:text-[#FFDD00]">FAQs</Link></li>
                 <li><Link href="/returns" className="hover:text-[#FFDD00]">Returns</Link></li>
@@ -389,16 +327,20 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Terms</h4>
-              <ul className="space-y-2 text-white/80">
+              <h4 className="font-semibold mb-4" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>TERMS</h4>
+              <ul className="space-y-2 text-white/80 text-sm">
                 <li><Link href="/terms-conditions" className="hover:text-[#FFDD00]">Terms & Conditions</Link></li>
                 <li><Link href="/privacy-policy" className="hover:text-[#FFDD00]">Privacy Policy</Link></li>
                 <li><Link href="/hipaa-notice" className="hover:text-[#FFDD00]">HIPAA Notice</Link></li>
+                <li><Link href="/telehealth-notice" className="hover:text-[#FFDD00]">Telehealth Notice</Link></li>
               </ul>
             </div>
           </div>
-          <Separator className="my-8 bg-white/20" />
-          <p className="text-center text-white/60" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>© GOLD'S HEALTH 2025, ALL RIGHTS RESERVED</p>
+          <Separator className="my-8 bg-white/10" />
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-center text-white/60 text-sm" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>© GOLD'S HEALTH 2025, ALL RIGHTS RESERVED</p>
+            <p className="text-center text-white/40 text-xs">Compounded in the USA</p>
+          </div>
         </div>
       </footer>
     </main>
@@ -407,21 +349,21 @@ export default function Home() {
 
 function ProductCard({ category, name, type, badge, inStock }: { category: string; name: string; type: string; badge?: string; inStock?: boolean }) {
   return (
-    <Card className="hover:shadow-lg transition-shadow">
+    <Card className="hover:shadow-lg transition-shadow border-2 border-transparent hover:border-[#FFDD00]">
       <CardHeader className="pb-2">
         <div className="flex justify-between items-start">
-          <Badge variant="outline" className="text-xs">{category}</Badge>
-          {badge && <Badge className="bg-[#EF4049] text-white">{badge}</Badge>}
+          <Badge variant="outline" className="text-xs font-semibold">{category}</Badge>
+          {badge && <Badge className="bg-[#EF4049] text-white font-bold">{badge}</Badge>}
         </div>
-        {inStock && <p className="text-xs text-green-600">In Stock</p>}
-        <CardTitle className="text-lg mt-2">{name}</CardTitle>
+        {inStock && <p className="text-xs text-green-600 font-semibold">In Stock</p>}
+        <CardTitle className="text-lg mt-2" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{name}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-muted-foreground">{type}</p>
+        <p className="text-sm text-muted-foreground" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{type}</p>
       </CardContent>
       <CardFooter className="gap-2">
-        <Button size="sm" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] flex-1 font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Get Started</Button>
-        <Button size="sm" variant="outline" className="flex-1">Explore</Button>
+        <Button size="sm" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] flex-1 font-bold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Get Started</Button>
+        <Button size="sm" variant="outline" className="flex-1 font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Explore</Button>
       </CardFooter>
     </Card>
   );
@@ -429,9 +371,9 @@ function ProductCard({ category, name, type, badge, inStock }: { category: strin
 
 function BenefitCard({ title, description }: { title: string; description: string }) {
   return (
-    <Card className="bg-[#333333] border-[#FFDD00]/20 text-white">
+    <Card className="bg-[#444444] border-[#FFDD00]/20 text-white">
       <CardContent className="pt-6">
-        <h3 className="text-lg font-semibold mb-2 text-[#FFDD00]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{title}</h3>
+        <h3 className="text-lg font-bold mb-2 text-[#FFDD00]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{title}</h3>
         <p className="text-white/80">{description}</p>
       </CardContent>
     </Card>
@@ -440,12 +382,12 @@ function BenefitCard({ title, description }: { title: string; description: strin
 
 function TestimonialCard({ quote, name, result }: { quote: string; name: string; result: string }) {
   return (
-    <Card>
+    <Card className="bg-white">
       <CardContent className="pt-6">
-        <p className="text-lg italic mb-4">"{quote}"</p>
-        <Separator className="my-4" />
-        <p className="font-semibold">{name}</p>
-        <p className="text-sm text-[#FFDD00] font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{result}</p>
+        <p className="text-lg italic mb-4 text-[#444444]">"{quote}"</p>
+        <Separator className="my-4 bg-[#FFDD00]/20" />
+        <p className="font-bold text-[#444444]">{name}</p>
+        <p className="text-sm text-[#FFDD00] font-bold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{result}</p>
       </CardContent>
     </Card>
   );
