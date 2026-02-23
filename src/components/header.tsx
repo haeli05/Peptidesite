@@ -2,181 +2,241 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Menu, X, ChevronDown } from "lucide-react";
 
-const products = [
-  { title: "Personalized GLP-1", href: "/weight-loss/personalized-glp-1", description: "Injectable personalized treatment" },
-  { title: "Zepbound", href: "/weight-loss/zepbound", description: "Injectable weight loss" },
-  { title: "Ozempic", href: "/weight-loss/ozempic", description: "Injectable GLP-1" },
-  { title: "Wegovy", href: "/weight-loss/wegovy", description: "Injectable weight management" },
-  { title: "Saxenda", href: "/weight-loss/saxenda", description: "Daily injectable" },
-];
+function getCountdownTarget() {
+  const cycleMs = 3 * 24 * 60 * 60 * 1000;
+  const epoch = new Date('2024-01-01T00:00:00Z').getTime();
+  const now = Date.now();
+  const elapsed = now - epoch;
+  return new Date(epoch + (Math.floor(elapsed / cycleMs) + 1) * cycleMs);
+}
 
-const intimacyProducts = [
-  { title: "Sildenafil", href: "/sexual-health/sildenafil", description: "Pill for performance" },
-  { title: "Tadalafil", href: "/sexual-health/tadalafil", description: "Long-lasting pill" },
-  { title: "Viagra", href: "/sexual-health/viagra", description: "Brand medication" },
-  { title: "Cialis", href: "/sexual-health/cialis", description: "Extended duration" },
-];
+function useCountdown() {
+  const [timeLeft, setTimeLeft] = React.useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
-const dailyHealthProducts = [
-  { title: "NAD+", href: "/daily-health/nad-injections", description: "Anti-aging injections" },
-  { title: "Sermorelin", href: "/daily-health/sermorelin", description: "Growth hormone support" },
-  { title: "Methylene Blue", href: "/daily-health/methylene-blue", description: "Cognitive support" },
-];
+  React.useEffect(() => {
+    function update() {
+      const deadline = getCountdownTarget();
+      const total = deadline.getTime() - Date.now();
+      if (total > 0) {
+        setTimeLeft({
+          days: Math.floor(total / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((total / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((total / (1000 * 60)) % 60),
+          seconds: Math.floor((total / 1000) % 60),
+        });
+      }
+    }
+    update();
+    const interval = setInterval(update, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
-const hairProducts = [
-  { title: "Finasteride", href: "/hair/finasteride", description: "Hair loss treatment" },
-  { title: "Oral Minoxidil", href: "/hair/oral-minoxidil", description: "Hair growth pills" },
-  { title: "Finasteride & Minoxidil Spray", href: "/hair/finasteride-minoxidil-spray", description: "Combination spray" },
-];
+  return timeLeft;
+}
 
-export function Header() {
-  const pathname = usePathname();
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const isActive = (path: string) => pathname === path;
+function PromoBanner({ onClose }: { onClose: () => void }) {
+  const timeLeft = useCountdown();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-[#444444]/95 backdrop-blur supports-[backdrop-filter]:bg-[#444444]/90">
+    <div className="bg-[#333333] text-white py-2.5 px-4 relative border-b border-white/5">
+      <div className="flex items-center justify-center gap-4">
+        <span className="text-sm font-semibold hidden sm:inline" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+          40% OFF - Sale Ends In:
+        </span>
+        <span className="text-sm font-semibold sm:hidden" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+          40% OFF
+        </span>
+        <div className="flex items-center gap-1.5">
+          <div className="text-center">
+            <span className="bg-white/20 text-white font-bold px-1.5 py-0.5 rounded text-xs min-w-[24px] inline-block text-center" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+              {timeLeft.days}
+            </span>
+            <span className="text-white/70 text-[10px] ml-0.5">Days</span>
+          </div>
+          <div className="text-center">
+            <span className="bg-white/20 text-white font-bold px-1.5 py-0.5 rounded text-xs min-w-[24px] inline-block text-center" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+              {String(timeLeft.hours).padStart(2, '0')}
+            </span>
+            <span className="text-white/70 text-[10px] ml-0.5">Hours</span>
+          </div>
+          <div className="text-center">
+            <span className="bg-white/20 text-white font-bold px-1.5 py-0.5 rounded text-xs min-w-[24px] inline-block text-center" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+              {String(timeLeft.minutes).padStart(2, '0')}
+            </span>
+            <span className="text-white/70 text-[10px] ml-0.5">Min</span>
+          </div>
+          <div className="text-center">
+            <span className="bg-white/20 text-white font-bold px-1.5 py-0.5 rounded text-xs min-w-[24px] inline-block text-center" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+              {String(timeLeft.seconds).padStart(2, '0')}
+            </span>
+            <span className="text-white/70 text-[10px] ml-0.5">Sec</span>
+          </div>
+        </div>
+      </div>
+      <button
+        onClick={onClose}
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white"
+      >
+        <X className="h-3.5 w-3.5" />
+      </button>
+    </div>
+  );
+}
+
+const navDropdowns = [
+  {
+    label: "Weight Loss",
+    href: "/weight-loss",
+    items: [
+      { title: "View All Weight Loss Products", href: "/weight-loss", featured: true },
+      { title: "Personalized GLP-1", href: "/weight-loss/personalized-glp-1" },
+      { title: "Zepbound", href: "/weight-loss/zepbound" },
+      { title: "Ozempic", href: "/weight-loss/ozempic" },
+      { title: "Wegovy", href: "/weight-loss/wegovy" },
+      { title: "Saxenda", href: "/weight-loss/saxenda" },
+    ],
+  },
+  {
+    label: "Better Intimacy",
+    href: "/sexual-health",
+    items: [
+      { title: "View All Better Intimacy Products", href: "/sexual-health", featured: true },
+      { title: "Sildenafil", href: "/sexual-health/sildenafil" },
+      { title: "Tadalafil", href: "/sexual-health/tadalafil" },
+      { title: "Viagra", href: "/sexual-health/viagra" },
+      { title: "Cialis", href: "/sexual-health/cialis" },
+    ],
+  },
+  {
+    label: "Daily Health",
+    href: "/daily-health",
+    items: [
+      { title: "View All Daily Health Products", href: "/daily-health", featured: true },
+      { title: "NAD+", href: "/daily-health/nad-injections" },
+      { title: "Sermorelin", href: "/daily-health/sermorelin" },
+      { title: "Methylene Blue", href: "/daily-health/methylene-blue" },
+    ],
+  },
+  {
+    label: "Hair Growth",
+    href: "/hair",
+    items: [
+      { title: "View All Hair Growth Products", href: "/hair", featured: true },
+      { title: "Finasteride", href: "/hair/finasteride" },
+      { title: "Oral Minoxidil", href: "/hair/oral-minoxidil" },
+      { title: "Finasteride & Minoxidil Spray", href: "/hair/finasteride-minoxidil-spray" },
+    ],
+  },
+];
+
+function NavDropdown({ label, items }: { label: string; href: string; items: { title: string; href: string; featured?: boolean }[] }) {
+  const [open, setOpen] = React.useState(false);
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  const handleEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setOpen(true);
+  };
+  const handleLeave = () => {
+    timeoutRef.current = setTimeout(() => setOpen(false), 150);
+  };
+
+  return (
+    <div className="relative" onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
+      <button className="flex items-center gap-1 text-sm text-white hover:text-[#FFDD00] transition-colors bg-transparent border-none outline-none cursor-pointer py-2 px-1">
+        <span>{label}</span>
+        <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <div className="absolute top-full left-0 pt-2 z-50">
+          <div className="bg-[#333333] border border-white/10 rounded-lg shadow-xl min-w-[220px] py-2">
+            {items.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`block px-4 py-2 text-sm transition-colors ${
+                  item.featured
+                    ? "text-[#FFDD00] font-semibold hover:bg-white/5 border-b border-white/10 mb-1 pb-3"
+                    : "text-white/80 hover:text-[#FFDD00] hover:bg-white/5"
+                }`}
+                onClick={() => setOpen(false)}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function Header() {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
+  const [bannerVisible, setBannerVisible] = React.useState(true);
+
+  React.useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-[#444444]/95 backdrop-blur border-b border-white/10" : "bg-transparent"}`}>
+      {bannerVisible && <PromoBanner onClose={() => setBannerVisible(false)} />}
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold text-[#FFDD00] tracking-wide" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>GOLD'S HEALTH</span>
+          <span className="text-2xl font-bold text-[#FFDD00] tracking-wide" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>GOLD PEPTIDES</span>
         </Link>
 
-        <div className="hidden md:flex">
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className={isActive("/weight-loss") ? "text-[#FFDD00]" : "text-white bg-transparent data-[state=open]:bg-transparent data-[state=open]:text-[#FFDD00]"}>
-                  <span className="text-white hover:text-[#FFDD00] data-[state=open]:text-[#FFDD00]">Weight Loss</span>
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                    <li className="row-span-3">
-                      <NavigationMenuLink asChild>
-                        <a
-                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-[#FFDD00] to-[#FFD700] p-6 no-underline outline-none focus:shadow-md"
-                          href="/weight-loss"
-                        >
-                          <span className="mb-2 text-lg font-semibold text-[#444444]">Weight Loss</span>
-                          <p className="text-sm leading-tight text-[#444444]/80">
-                            Achieve your weight loss goals with personalized GLP-1 treatments.
-                          </p>
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                    {products.map((product) => (
-                      <ListItem key={product.title} title={product.title} href={product.href}>
-                        {product.description}
-                      </ListItem>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
+        <nav className="hidden md:flex items-center gap-6">
+          {navDropdowns.map((dropdown) => (
+            <NavDropdown key={dropdown.label} {...dropdown} />
+          ))}
+          <Link href="/how-it-works" className="text-sm text-white hover:text-[#FFDD00] transition-colors py-2">
+            How It Works
+          </Link>
+        </nav>
 
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="data-[state=open]:text-[#FFDD00]">
-                  <span className="text-white hover:text-[#FFDD00]">Better Intimacy</span>
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
-                    {intimacyProducts.map((product) => (
-                      <ListItem key={product.title} title={product.title} href={product.href}>
-                        {product.description}
-                      </ListItem>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="data-[state=open]:text-[#FFDD00]">
-                  <span className="text-white hover:text-[#FFDD00]">Daily Health</span>
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
-                    {dailyHealthProducts.map((product) => (
-                      <ListItem key={product.title} title={product.title} href={product.href}>
-                        {product.description}
-                      </ListItem>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="data-[state=open]:text-[#FFDD00]">
-                  <span className="text-white hover:text-[#FFDD00]">Hair Growth</span>
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
-                    {hairProducts.map((product) => (
-                      <ListItem key={product.title} title={product.title} href={product.href}>
-                        {product.description}
-                      </ListItem>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <Link href="/how-it-works" legacyBehavior passHref>
-                  <NavigationMenuLink className="text-white hover:text-[#FFDD00]">
-                    How It Works
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <Link href="/login" className="hidden text-sm font-medium text-white hover:text-[#FFDD00] sm:block">
+        <div className="flex items-center gap-5">
+          <Link href="/login" className="hidden sm:block text-sm text-white hover:text-[#FFDD00] transition-colors">
             Login
           </Link>
-          <Button className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] font-semibold">Get Started</Button>
-          
+
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" className="text-white">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-transparent hover:text-[#FFDD00]">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-[#444444]">
+            <SheetContent side="right" className="bg-[#333333] border-l border-white/10">
               <nav className="flex flex-col gap-4 mt-8">
-                <Link href="/weight-loss" className="text-lg font-medium text-white hover:text-[#FFDD00]" onClick={() => setIsOpen(false)}>
+                <Link href="/weight-loss" className="text-lg text-white hover:text-[#FFDD00] transition-colors" onClick={() => setIsOpen(false)}>
                   Weight Loss
                 </Link>
-                <Link href="/sexual-health" className="text-lg font-medium text-white hover:text-[#FFDD00]" onClick={() => setIsOpen(false)}>
+                <Link href="/sexual-health" className="text-lg text-white hover:text-[#FFDD00] transition-colors" onClick={() => setIsOpen(false)}>
                   Better Intimacy
                 </Link>
-                <Link href="/daily-health" className="text-lg font-medium text-white hover:text-[#FFDD00]" onClick={() => setIsOpen(false)}>
+                <Link href="/daily-health" className="text-lg text-white hover:text-[#FFDD00] transition-colors" onClick={() => setIsOpen(false)}>
                   Daily Health
                 </Link>
-                <Link href="/hair" className="text-lg font-medium text-white hover:text-[#FFDD00]" onClick={() => setIsOpen(false)}>
+                <Link href="/hair" className="text-lg text-white hover:text-[#FFDD00] transition-colors" onClick={() => setIsOpen(false)}>
                   Hair Growth
                 </Link>
-                <Link href="/how-it-works" className="text-lg font-medium text-white hover:text-[#FFDD00]" onClick={() => setIsOpen(false)}>
+                <Link href="/how-it-works" className="text-lg text-white hover:text-[#FFDD00] transition-colors" onClick={() => setIsOpen(false)}>
                   How It Works
                 </Link>
-                <Link href="/login" className="text-lg font-medium text-white hover:text-[#FFDD00]" onClick={() => setIsOpen(false)}>
+                <Link href="/login" className="text-lg text-white hover:text-[#FFDD00] transition-colors" onClick={() => setIsOpen(false)}>
                   Login
                 </Link>
               </nav>
@@ -186,34 +246,4 @@ export function Header() {
       </div>
     </header>
   );
-}
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-[#FFDD00] hover:text-[#444444] focus:bg-[#FFDD00] focus:text-[#444444]",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";
-
-function cn(...classes: (string | undefined | null | false)[]) {
-  return classes.filter(Boolean).join(" ");
 }

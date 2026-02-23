@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald" });
 
 export const metadata: Metadata = {
-  title: "Gold's Health - Personalized Health & Wellness",
+  title: "Gold Peptides - Personalized Health & Wellness",
   description: "Premium prescriptions at the lowest prices. GLP-1s, weight loss, intimacy health, daily wellness, and hair growth solutions.",
 };
 
