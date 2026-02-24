@@ -175,38 +175,73 @@ export default function Home() {
     <main className="flex min-h-screen flex-col">
 
       {/* ═══ 1. HERO SECTION ═══ */}
-      <section className="relative bg-[#FFFEF0] pt-20 pb-24 md:pt-28 md:pb-32">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl">
-            <div className="flex flex-col sm:flex-row items-start gap-3 mb-5">
-              <span className="text-[#444444]/80 font-semibold tracking-wider text-sm uppercase" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-                40% OFF - SALE ENDS IN:
-              </span>
-              <CountdownTimer />
-            </div>
-
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#444444] mb-4 leading-[1.1]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-              Doctor-Trusted Care,{" "}
-              <span className="text-[#FFDD00]">Personalized for You</span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-[#444444] mb-1">
-              GLP-1s from <strong className="text-[#FFDD00]">$4/day</strong>, delivered fast
-            </p>
-            <p className="text-[#444444]/50 text-sm mb-8">Free & Discreet Shipping | No Hidden Fees</p>
-
-            <Link href="/login">
-              <Button size="lg" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] text-lg px-10 py-6 font-bold rounded-lg" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-                Get Started
-              </Button>
-            </Link>
+      <section className="relative bg-[#FFFEF0] pt-24 pb-52 md:pt-32 md:pb-64">
+        <div className="container mx-auto px-4 text-center">
+          {/* Label pill */}
+          <div className="inline-flex items-center gap-2 border border-[#444444]/20 text-[#444444]/70 px-4 py-1.5 rounded-full mb-6">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z"/>
+              <path d="M20 20V17C20 15.3431 18.6569 14 17 14H7C5.34315 14 4 15.3431 4 17V20H6V17C6 16.4477 6.44772 16 7 16H17C17.5523 16 18 16.4477 18 17V20H20Z"/>
+              <path d="M19 9H18V7H16V9H15V11H16V13H18V11H19V9Z"/>
+            </svg>
+            <span className="text-xs font-medium" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Doctor-Trusted Care, Personalized for You</span>
           </div>
+
+          {/* Main heading */}
+          <h1 className="text-2xl md:text-4xl font-bold text-[#444444] mb-3 leading-[1.2]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+            Personalized GLP-1&apos;s<br />
+            <strong className="text-[#FFDD00]">40% Off</strong> Sale
+          </h1>
+
+          <Link href="/login">
+            <Button size="lg" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] text-base px-8 py-5 font-bold rounded-lg" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+              Get Started
+            </Button>
+          </Link>
         </div>
       </section>
 
-      {/* ═══ 2. CATEGORY CARDS ═══ */}
-      <section className="py-10 md:py-14 bg-[#FFFEF0] -mt-20 relative z-10">
+      {/* ═══ 1b. FEATURE TILES ═══ */}
+      <section className="bg-[#FFFEF0] -mt-40 md:-mt-48 relative z-10">
         <div className="container mx-auto px-4">
+          <div className="grid grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10">
+            <div className="flex flex-col items-center text-center gap-2 py-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="28" height="28" className="text-[#444444]">
+                <rect width="256" height="256" fill="none"/>
+                <polygon points="128 160 176 216 80 216 128 160" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <path d="M56,192H48a16,16,0,0,1-16-16V64A16,16,0,0,1,48,48H208a16,16,0,0,1,16,16V176a16,16,0,0,1-16,16h-8" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+              </svg>
+              <p className="text-xs md:text-sm text-[#444444]">Premium Prescriptions<br /><strong>At The Lowest Prices</strong></p>
+            </div>
+            <div className="flex flex-col items-center text-center gap-2 py-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="28" height="28" className="text-[#444444]">
+                <rect width="256" height="256" fill="none"/>
+                <line x1="184" y1="24" x2="232" y2="72" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <line x1="128" y1="48" x2="208" y2="128" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <path d="M140,60,50.34,149.66A8,8,0,0,0,48,155.31V208h52.69a8,8,0,0,0,5.65-2.34L196,116" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <line x1="98" y1="102" x2="124" y2="128" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <line x1="74" y1="126" x2="100" y2="152" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <line x1="168" y1="88" x2="208" y2="48" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <line x1="48" y1="208" x2="24" y2="232" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+              </svg>
+              <p className="text-xs md:text-sm text-[#444444]">GLP-1s from <strong>$4/day</strong>, delivered fast</p>
+            </div>
+            <div className="flex flex-col items-center text-center gap-2 py-4">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="28" height="28" className="text-[#444444]">
+                <rect width="256" height="256" fill="none"/>
+                <path d="M184,80h42.58A8,8,0,0,1,234,85l14,35" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <line x1="24" y1="144" x2="184" y2="144" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <circle cx="192" cy="192" r="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <circle cx="80" cy="192" r="24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <line x1="168" y1="192" x2="104" y2="192" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <path d="M184,120h64v64a8,8,0,0,1-8,8H216" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+                <path d="M56,192H32a8,8,0,0,1-8-8V72a8,8,0,0,1,8-8H184V169.37" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
+              </svg>
+              <p className="text-xs md:text-sm text-[#444444]"><strong>Free Shipping</strong></p>
+            </div>
+          </div>
+
+          {/* ═══ 2. CATEGORY CARDS (overlapping into hero) ═══ */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
             {[
               { title: "Weight Loss", subtitle: "Achieve your weight loss Goals", href: "/weight-loss", gradient: "from-[#4a4a4a] to-[#2a2a2a]" },
@@ -215,10 +250,10 @@ export default function Home() {
               { title: "Hair Growth", subtitle: "Lasting solutions for fuller hair", href: "/hair", gradient: "from-[#4a4a4a] to-[#2a2a2a]" },
             ].map((cat) => (
               <Link key={cat.title} href={cat.href} className="group">
-                <div className={`relative rounded-xl overflow-hidden h-[260px] md:h-[380px] bg-gradient-to-b ${cat.gradient} flex flex-col justify-end p-5 md:p-7 transition-all group-hover:shadow-xl`}>
+                <div className={`relative rounded-xl overflow-hidden h-[280px] md:h-[420px] bg-gradient-to-b ${cat.gradient} flex flex-col justify-end p-5 md:p-7 transition-all group-hover:shadow-2xl shadow-lg`}>
                   <div className="absolute inset-0 bg-[#FFDD00]/0 group-hover:bg-[#FFDD00]/5 transition-all duration-300" />
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-1 relative z-10" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{cat.title}</h3>
-                  <p className="text-xs md:text-sm text-white/60 relative z-10">{cat.subtitle}</p>
+                  <h3 className="text-lg md:text-2xl font-bold text-white mb-1 relative z-10" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{cat.title}</h3>
+                  <p className="text-[11px] md:text-sm text-white/50 relative z-10">{cat.subtitle}</p>
                 </div>
               </Link>
             ))}
