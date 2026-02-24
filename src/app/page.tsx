@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Plus, Minus } from "lucide-react";
@@ -163,6 +162,57 @@ function TestimonialCard({ quote, name, result }: { quote: string; name: string;
         )}
       </div>
     </div>
+  );
+}
+
+/* ─── FAQ Accordion (refills.com style) ─── */
+function FAQAccordionItem({ question, answer }: { question: string; answer: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="bg-white rounded-xl border border-[#444444]/10 shadow-sm">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left bg-transparent border-none cursor-pointer"
+      >
+        <h3 className="text-sm md:text-base font-semibold text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+          {question}
+        </h3>
+        <div className="flex-shrink-0 w-5 h-5 text-[#444444] transition-transform duration-300" style={{ transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}>
+          <svg width="100%" height="100%" viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M34 30V6H30V30H6V34H30V58H34V34H58V30H34Z" fill="currentColor" />
+          </svg>
+        </div>
+      </button>
+      <div
+        className="overflow-hidden transition-all duration-300"
+        style={{ maxHeight: isOpen ? "500px" : "0px", opacity: isOpen ? 1 : 0 }}
+      >
+        <div className="px-5 pb-4">
+          <p className="text-[#444444]/70 text-sm leading-relaxed">{answer}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FAQAccordion() {
+  const faqs = [
+    { q: "What is Gold Peptides, and how does it work?", a: "Gold Peptides is a personalized health platform that connects you with licensed providers to support your wellness goals. After an initial consultation, you'll receive a customized plan, which may include medications, lifestyle recommendations, and ongoing support." },
+    { q: "Who are the providers at Gold Peptides?", a: "Our network comprises licensed healthcare professionals experienced in weight management and overall wellness. They are dedicated to guiding you through your journey with personalized care." },
+    { q: "What if the prescribed medication isn't effective for me?", a: "If you find that the initial medication isn't yielding the desired results, our providers will reassess and adjust your treatment plan to better suit your needs." },
+    { q: "What weight loss medications does Gold Peptides offer?", a: "Gold Peptides offers clinician-guided medical weight loss options that may include GLP-1 medications (and related therapies) based on your health history, goals, and eligibility. Your provider will recommend the most appropriate option after your consultation." },
+    { q: "How soon will I have my first consultation?", a: "Typically, you'll have your initial consultation within a few days of signing up. This allows our providers to understand your goals and tailor a plan accordingly." },
+    { q: "Is Gold Peptides available in my state?", a: "Gold Peptides operates across all 50 states, ensuring nationwide access to our services." },
+    { q: "How do I get started with Gold Peptides?", a: "Begin by signing up on our website. You'll complete a health questionnaire, after which you'll be matched with a provider to initiate your personalized wellness plan." },
+  ];
+
+  return (
+    <>
+      {faqs.map((faq, i) => (
+        <FAQAccordionItem key={i} question={faq.q} answer={faq.a} />
+      ))}
+    </>
   );
 }
 
@@ -424,33 +474,16 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-10 md:gap-16">
             {/* Left - Header */}
             <div className="md:sticky md:top-32 md:self-start">
-              <div className="inline-block border border-[#444444]/15 rounded-full px-4 py-1.5 mb-4">
+              <div className="inline-block border border-[#444444]/15 rounded-full px-4 py-1.5 mb-5">
                 <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>FAQ</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#444444] leading-tight" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
                 Gold Peptides Frequently Asked Questions
               </h2>
             </div>
-            {/* Right - Accordions */}
-            <div>
-              <Accordion type="single" collapsible className="w-full">
-                {[
-                  { q: "What is Gold Peptides, and how does it work?", a: "Gold Peptides is a personalized health platform that connects you with licensed providers to support your wellness goals. After an initial consultation, you'll receive a customized plan, which may include medications, lifestyle recommendations, and ongoing support." },
-                  { q: "Who are the providers at Gold Peptides?", a: "Our network comprises licensed healthcare professionals experienced in weight management and overall wellness. They are dedicated to guiding you through your journey with personalized care." },
-                  { q: "What if the prescribed medication isn't effective for me?", a: "If you find that the initial medication isn't yielding the desired results, our providers will reassess and adjust your treatment plan to better suit your needs." },
-                  { q: "What weight loss medications does Gold Peptides offer?", a: "Gold Peptides offers clinician-guided medical weight loss options that may include GLP-1 medications (and related therapies) based on your health history, goals, and eligibility. Your provider will recommend the most appropriate option after your consultation." },
-                  { q: "How soon will I have my first consultation?", a: "Typically, you'll have your initial consultation within a few days of signing up. This allows our providers to understand your goals and tailor a plan accordingly." },
-                  { q: "Is Gold Peptides available in my state?", a: "Gold Peptides operates across all 50 states, ensuring nationwide access to our services." },
-                  { q: "How do I get started with Gold Peptides?", a: "Begin by signing up on our website. You'll complete a health questionnaire, after which you'll be matched with a provider to initiate your personalized wellness plan." },
-                ].map((faq, i) => (
-                  <AccordionItem key={i} value={`item-${i}`}>
-                    <AccordionTrigger className="text-[#444444] text-left text-sm md:text-base font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{faq.q}</AccordionTrigger>
-                    <AccordionContent>
-                      <p className="text-[#444444]/70 text-sm">{faq.a}</p>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+            {/* Right - FAQ Accordions */}
+            <div className="space-y-3">
+              <FAQAccordion />
             </div>
           </div>
         </div>
