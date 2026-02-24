@@ -188,7 +188,7 @@ export default function Home() {
           </div>
 
           {/* Main heading */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#444444] mb-8 leading-[1.1]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+          <h1 className="text-3xl md:text-5xl font-bold text-[#444444] mb-8 leading-[1.1]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
             Personalized GLP-1&apos;s<br />
             40% Off Sale
           </h1>
@@ -201,10 +201,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ 1b. FEATURE TILES ═══ */}
-      <section className="bg-[#FFFEF0] pb-4">
+      {/* ═══ 1b. CATEGORY CARDS + FEATURE TILES ═══ */}
+      <section className="bg-[#FFFEF0] pb-10">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10">
+          {/* ═══ 2. CATEGORY CARDS ═══ */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+            {[
+              { title: "Weight Loss", subtitle: "Achieve your weight loss Goals", href: "/weight-loss", video: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a45f6_shutterstock_1109870429-transcode.mp4", poster: "https://cdn.prod.website-files.com/680837d163525d9ff4a44785/682e68c3383995b5be5d2553_shutterstock_1109870429-poster-00001.jpg", image: "" },
+              { title: "Better Intimacy", subtitle: "Gain Confidence and Last Longer", href: "/sexual-health", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a4538_sexual.jpg" },
+              { title: "Daily Health", subtitle: "Become the Best version of yourself", href: "/daily-health", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454d_anxiety.jpg" },
+              { title: "Hair Growth", subtitle: "Lasting solutions for fuller hair", href: "/hair", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454b_hair.jpg" },
+            ].map((cat) => (
+              <Link key={cat.title} href={cat.href} className="group">
+                <div className="relative rounded-2xl overflow-hidden h-[320px] md:h-[460px] flex flex-col justify-end p-5 md:p-7 transition-all group-hover:shadow-2xl shadow-lg">
+                  {"video" in cat && cat.video ? (
+                    <video autoPlay loop muted playsInline poster={cat.poster} className="absolute inset-0 w-full h-full object-cover">
+                      <source src={cat.video} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <img src={cat.image} alt={cat.title} className="absolute inset-0 w-full h-full object-cover" />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  <h3 className="text-lg md:text-2xl font-bold text-white mb-1 relative z-10" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{cat.title}</h3>
+                  <p className="text-[11px] md:text-sm text-white/70 relative z-10">{cat.subtitle}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Feature Tiles */}
+          <div className="grid grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-10">
             <div className="flex flex-col items-center text-center gap-2 py-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="28" height="28" className="text-[#444444]">
                 <rect width="256" height="256" fill="none"/>
@@ -224,7 +250,7 @@ export default function Home() {
                 <line x1="168" y1="88" x2="208" y2="48" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
                 <line x1="48" y1="208" x2="24" y2="232" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="16"/>
               </svg>
-              <p className="text-xs md:text-sm text-[#444444]">GLP-1s from <strong>$4/day</strong>, delivered fast</p>
+              <p className="text-xs md:text-sm text-[#444444]">GLP-1s from <strong>$5/day</strong>, delivered fast</p>
             </div>
             <div className="flex flex-col items-center text-center gap-2 py-4">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="28" height="28" className="text-[#444444]">
@@ -240,28 +266,35 @@ export default function Home() {
               <p className="text-xs md:text-sm text-[#444444]"><strong>Free Shipping</strong></p>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* ═══ 2. CATEGORY CARDS ═══ */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
-            {[
-              { title: "Weight Loss", subtitle: "Achieve your weight loss Goals", href: "/weight-loss", gradient: "from-[#4a4a4a] to-[#2a2a2a]" },
-              { title: "Better Intimacy", subtitle: "Gain Confidence and Last Longer", href: "/sexual-health", gradient: "from-[#4a4a4a] to-[#2a2a2a]" },
-              { title: "Daily Health", subtitle: "Become the Best version of yourself", href: "/daily-health", gradient: "from-[#4a4a4a] to-[#2a2a2a]" },
-              { title: "Hair Growth", subtitle: "Lasting solutions for fuller hair", href: "/hair", gradient: "from-[#4a4a4a] to-[#2a2a2a]" },
-            ].map((cat) => (
-              <Link key={cat.title} href={cat.href} className="group">
-                <div className={`relative rounded-2xl overflow-hidden h-[320px] md:h-[460px] bg-gradient-to-b ${cat.gradient} flex flex-col justify-end p-5 md:p-7 transition-all group-hover:shadow-2xl shadow-lg`}>
-                  <div className="absolute inset-0 bg-[#FFDD00]/0 group-hover:bg-[#FFDD00]/5 transition-all duration-300" />
-                  <h3 className="text-lg md:text-2xl font-bold text-white mb-1 relative z-10" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{cat.title}</h3>
-                  <p className="text-[11px] md:text-sm text-white/50 relative z-10">{cat.subtitle}</p>
-                </div>
-              </Link>
+      {/* ═══ 3. SCROLLING BADGE CAROUSEL ═══ */}
+      <section className="py-6 bg-[#FFFEF0] overflow-hidden">
+        <div className="relative">
+          <div className="flex animate-scroll-left gap-4" style={{ width: "max-content" }}>
+            {[...Array(3)].map((_, setIndex) => (
+              <div key={setIndex} className="flex gap-4">
+                {[
+                  "Board Certified Physicians",
+                  "FDA-Regulated Pharmacies",
+                  "100% Online Process",
+                  "Free & Discreet Shipping",
+                  "Affordable Pricing",
+                  "No Hidden Fees",
+                  "No Insurance Required",
+                ].map((item) => (
+                  <div key={`${setIndex}-${item}`} className="border border-[#444444]/15 rounded-full px-5 py-2 whitespace-nowrap">
+                    <span className="text-[#444444] text-sm font-medium">{item}</span>
+                  </div>
+                ))}
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══ 3. PRODUCT CAROUSEL ═══ */}
+      {/* ═══ 4. PRODUCT CAROUSEL ═══ */}
       <section className="py-14 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
@@ -271,41 +304,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ 4. TRUST/FEATURES BAR ═══ */}
-      <section className="py-5 bg-[#333333]">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-center">
-            {[
-              "BOARD CERTIFIED PHYSICIANS",
-              "FDA-REGULATED PHARMACIES",
-              "100% ONLINE PROCESS",
-              "FREE & DISCREET SHIPPING",
-              "AFFORDABLE PRICING",
-              "NO HIDDEN FEES",
-              "NO INSURANCE REQUIRED",
-            ].map((item) => (
-              <span key={item} className="text-white/90 text-xs font-semibold tracking-wider" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ═══ 5. LIFESTYLE SECTIONS ═══ */}
       <section>
         {[
-          { headline: "Shed the extra, feel extra good", category: "Weight Loss", href: "/weight-loss", gradient: "from-[#3a3a3a] to-[#222222]" },
-          { headline: "Fight back where it's thinning up top", category: "Hair Growth", href: "/hair", gradient: "from-[#4a4a4a] to-[#2a2a2a]" },
-          { headline: "Turn up the heat — naturally", category: "Better Intimacy", href: "/sexual-health", gradient: "from-[#3a3a3a] to-[#1a1a1a]" },
-          { headline: "Less stress, more yes", category: "Daily Health", href: "/daily-health", gradient: "from-[#4a4a4a] to-[#222222]" },
+          { headline: "Shed the extra, feel extra good", category: "Weight Loss", href: "/weight-loss" },
+          { headline: "Fight back where it's thinning up top", category: "Hair Growth", href: "/hair" },
+          { headline: "Turn up the heat — naturally", category: "Better Intimacy", href: "/sexual-health" },
+          { headline: "Less stress, more yes", category: "Daily Health", href: "/daily-health" },
         ].map((block, i) => (
           <Link key={block.headline} href={block.href} className="group block">
-            <div className={`relative bg-gradient-to-br ${block.gradient}`}>
+            <div className={`relative bg-[#FFFEF0] ${i > 0 ? "border-t border-[#444444]/10" : ""}`}>
               <div className="container mx-auto px-4 py-20 md:py-28">
                 <div className={`max-w-2xl ${i % 2 !== 0 ? "ml-auto text-right" : ""}`}>
                   <p className="text-xs text-[#FFDD00] font-semibold tracking-wider uppercase mb-3" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{block.category}</p>
-                  <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight group-hover:text-[#FFDD00] transition-colors" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+                  <h2 className="text-3xl md:text-5xl font-bold text-[#444444] leading-tight group-hover:text-[#FFDD00] transition-colors" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
                     {block.headline}
                   </h2>
                 </div>
@@ -316,9 +328,9 @@ export default function Home() {
       </section>
 
       {/* ═══ 6. "GOLD YOUR DAY" CTA ═══ */}
-      <section className="relative bg-gradient-to-br from-[#444444] to-[#222222] py-20 md:py-28">
+      <section className="relative bg-[#FFFEF0] border-t border-[#444444]/10 py-20 md:py-28">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-8" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+          <h2 className="text-4xl md:text-6xl font-bold text-[#444444] mb-8" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
             Gold Your Day
           </h2>
           <div className="flex flex-wrap justify-center gap-3 md:gap-5 mb-10">
@@ -330,7 +342,7 @@ export default function Home() {
               { label: "Daily Wellness", href: "/daily-health" },
             ].map((link) => (
               <Link key={link.label} href={link.href}>
-                <span className="inline-block border border-white/30 text-white hover:border-[#FFDD00] hover:text-[#FFDD00] transition-colors rounded-full px-6 py-2.5 text-sm font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+                <span className="inline-block border border-[#444444]/30 text-[#444444] hover:border-[#FFDD00] hover:text-[#FFDD00] transition-colors rounded-full px-6 py-2.5 text-sm font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
                   {link.label}
                 </span>
               </Link>
@@ -408,28 +420,39 @@ export default function Home() {
 
       {/* ═══ 9. FAQ ═══ */}
       <section className="py-16 md:py-20 bg-[#FFFEF0]">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 text-[#444444] uppercase tracking-wide" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-            Frequently Asked Questions
-          </h2>
-          <Accordion type="single" collapsible className="w-full">
-            {[
-              { q: "What is Gold Peptides, and how does it work?", a: "Gold Peptides is a personalized health platform that connects you with licensed providers to support your wellness goals. After an initial consultation, you'll receive a customized plan, which may include medications, lifestyle recommendations, and ongoing support." },
-              { q: "Who are the providers at Gold Peptides?", a: "Our network comprises licensed healthcare professionals experienced in weight management and overall wellness. They are dedicated to guiding you through your journey with personalized care." },
-              { q: "What if the prescribed medication isn't effective for me?", a: "If you find that the initial medication isn't yielding the desired results, our providers will reassess and adjust your treatment plan to better suit your needs." },
-              { q: "What weight loss medications does Gold Peptides offer?", a: "Gold Peptides offers clinician-guided medical weight loss options that may include GLP-1 medications (and related therapies) based on your health history, goals, and eligibility. Your provider will recommend the most appropriate option after your consultation." },
-              { q: "How soon will I have my first consultation?", a: "Typically, you'll have your initial consultation within a few days of signing up. This allows our providers to understand your goals and tailor a plan accordingly." },
-              { q: "Is Gold Peptides available in my state?", a: "Gold Peptides operates across all 50 states, ensuring nationwide access to our services." },
-              { q: "How do I get started with Gold Peptides?", a: "Begin by signing up on our website. You'll complete a health questionnaire, after which you'll be matched with a provider to initiate your personalized wellness plan." },
-            ].map((faq, i) => (
-              <AccordionItem key={i} value={`item-${i}`}>
-                <AccordionTrigger className="text-[#444444] text-left text-sm md:text-base" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{faq.q}</AccordionTrigger>
-                <AccordionContent>
-                  <p className="text-[#444444]/70 text-sm">{faq.a}</p>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16">
+            {/* Left - Header */}
+            <div className="md:sticky md:top-32 md:self-start">
+              <div className="inline-block border border-[#444444]/15 rounded-full px-4 py-1.5 mb-4">
+                <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>FAQ</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+                Gold Peptides Frequently Asked Questions
+              </h2>
+            </div>
+            {/* Right - Accordions */}
+            <div>
+              <Accordion type="single" collapsible className="w-full">
+                {[
+                  { q: "What is Gold Peptides, and how does it work?", a: "Gold Peptides is a personalized health platform that connects you with licensed providers to support your wellness goals. After an initial consultation, you'll receive a customized plan, which may include medications, lifestyle recommendations, and ongoing support." },
+                  { q: "Who are the providers at Gold Peptides?", a: "Our network comprises licensed healthcare professionals experienced in weight management and overall wellness. They are dedicated to guiding you through your journey with personalized care." },
+                  { q: "What if the prescribed medication isn't effective for me?", a: "If you find that the initial medication isn't yielding the desired results, our providers will reassess and adjust your treatment plan to better suit your needs." },
+                  { q: "What weight loss medications does Gold Peptides offer?", a: "Gold Peptides offers clinician-guided medical weight loss options that may include GLP-1 medications (and related therapies) based on your health history, goals, and eligibility. Your provider will recommend the most appropriate option after your consultation." },
+                  { q: "How soon will I have my first consultation?", a: "Typically, you'll have your initial consultation within a few days of signing up. This allows our providers to understand your goals and tailor a plan accordingly." },
+                  { q: "Is Gold Peptides available in my state?", a: "Gold Peptides operates across all 50 states, ensuring nationwide access to our services." },
+                  { q: "How do I get started with Gold Peptides?", a: "Begin by signing up on our website. You'll complete a health questionnaire, after which you'll be matched with a provider to initiate your personalized wellness plan." },
+                ].map((faq, i) => (
+                  <AccordionItem key={i} value={`item-${i}`}>
+                    <AccordionTrigger className="text-[#444444] text-left text-sm md:text-base font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{faq.q}</AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-[#444444]/70 text-sm">{faq.a}</p>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </div>
         </div>
       </section>
 

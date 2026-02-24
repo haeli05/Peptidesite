@@ -46,7 +46,7 @@ function PromoBanner({ onClose }: { onClose: () => void }) {
   const timeLeft = useCountdown();
 
   return (
-    <div className="bg-[#333333] text-white py-2.5 px-4 relative border-b border-white/5">
+    <div className="bg-[#FFDD00] text-[#444444] py-2.5 px-4 relative">
       <div className="flex items-center justify-center gap-4">
         <span className="text-sm font-semibold hidden sm:inline" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
           40% OFF - Sale Ends In:
@@ -56,34 +56,34 @@ function PromoBanner({ onClose }: { onClose: () => void }) {
         </span>
         <div className="flex items-center gap-1.5">
           <div className="text-center">
-            <span className="bg-white/20 text-white font-bold px-1.5 py-0.5 rounded text-xs min-w-[24px] inline-block text-center" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+            <span className="bg-[#444444]/20 text-[#444444] font-bold px-1.5 py-0.5 rounded text-xs min-w-[24px] inline-block text-center" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
               {timeLeft.days}
             </span>
-            <span className="text-white/70 text-[10px] ml-0.5">Days</span>
+            <span className="text-[#444444]/70 text-[10px] ml-0.5">Days</span>
           </div>
           <div className="text-center">
-            <span className="bg-white/20 text-white font-bold px-1.5 py-0.5 rounded text-xs min-w-[24px] inline-block text-center" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+            <span className="bg-[#444444]/20 text-[#444444] font-bold px-1.5 py-0.5 rounded text-xs min-w-[24px] inline-block text-center" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
               {String(timeLeft.hours).padStart(2, '0')}
             </span>
-            <span className="text-white/70 text-[10px] ml-0.5">Hours</span>
+            <span className="text-[#444444]/70 text-[10px] ml-0.5">Hours</span>
           </div>
           <div className="text-center">
-            <span className="bg-white/20 text-white font-bold px-1.5 py-0.5 rounded text-xs min-w-[24px] inline-block text-center" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+            <span className="bg-[#444444]/20 text-[#444444] font-bold px-1.5 py-0.5 rounded text-xs min-w-[24px] inline-block text-center" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
               {String(timeLeft.minutes).padStart(2, '0')}
             </span>
-            <span className="text-white/70 text-[10px] ml-0.5">Min</span>
+            <span className="text-[#444444]/70 text-[10px] ml-0.5">Min</span>
           </div>
           <div className="text-center">
-            <span className="bg-white/20 text-white font-bold px-1.5 py-0.5 rounded text-xs min-w-[24px] inline-block text-center" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+            <span className="bg-[#444444]/20 text-[#444444] font-bold px-1.5 py-0.5 rounded text-xs min-w-[24px] inline-block text-center" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
               {String(timeLeft.seconds).padStart(2, '0')}
             </span>
-            <span className="text-white/70 text-[10px] ml-0.5">Sec</span>
+            <span className="text-[#444444]/70 text-[10px] ml-0.5">Sec</span>
           </div>
         </div>
       </div>
       <button
         onClick={onClose}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 hover:text-white"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-[#444444]/70 hover:text-[#444444]"
       >
         <X className="h-3.5 w-3.5" />
       </button>
@@ -151,7 +151,7 @@ function NavDropdown({ label, items }: { label: string; href: string; items: { t
 
   return (
     <div className="relative" onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
-      <button className="flex items-center gap-1 text-sm text-white hover:text-[#FFDD00] transition-colors bg-transparent border-none outline-none cursor-pointer py-2 px-1">
+      <button className="flex items-center gap-1 text-sm text-[#444444] hover:text-[#FFDD00] transition-colors bg-transparent border-none outline-none cursor-pointer py-2 px-1">
         <span>{label}</span>
         <ChevronDown className={`h-3 w-3 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
@@ -192,30 +192,30 @@ export function Header() {
   }, []);
 
   return (
-    <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-[#444444]/95 backdrop-blur" : "bg-transparent"}`}>
+    <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-[#FFFEF0]/95 backdrop-blur shadow-sm" : "bg-transparent"}`}>
       {bannerVisible && <PromoBanner onClose={() => setBannerVisible(false)} />}
       <div className="container mx-auto flex h-16 items-center justify-between px-4 border-b border-[#444444]/10">
         <Link href="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold text-[#FFDD00] tracking-wide" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>GOLD PEPTIDES</span>
+          <span className="text-2xl font-bold text-[#FFDD00] tracking-wide" style={{ fontFamily: "var(--font-oswald), sans-serif", WebkitTextStroke: "1px #444444" }}>GOLD PEPTIDES</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
           {navDropdowns.map((dropdown) => (
             <NavDropdown key={dropdown.label} {...dropdown} />
           ))}
-          <Link href="/how-it-works" className="text-sm text-white hover:text-[#FFDD00] transition-colors py-2">
+          <Link href="/how-it-works" className="text-sm text-[#444444] hover:text-[#FFDD00] transition-colors py-2">
             How It Works
           </Link>
         </nav>
 
         <div className="flex items-center gap-5">
-          <Link href="/login" className="hidden sm:block text-sm text-white hover:text-[#FFDD00] transition-colors">
+          <Link href="/login" className="hidden sm:block text-sm text-[#444444] hover:text-[#FFDD00] transition-colors">
             Login
           </Link>
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" className="text-white hover:bg-transparent hover:text-[#FFDD00]">
+              <Button variant="ghost" size="icon" className="text-[#444444] hover:bg-transparent hover:text-[#FFDD00]">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
