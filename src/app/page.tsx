@@ -216,6 +216,170 @@ function FAQAccordion() {
   );
 }
 
+/* ─── Blurred Tabs Section (refills.com style) ─── */
+function BlurredTabs() {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const tabs = [
+    { label: "Lose Weight", headline: "Shed the extra, feel extra good.", href: "/weight-loss", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454a_Weight-Loss.jpg" },
+    { label: "Perform Better", headline: "Turn up the heat — naturally.", href: "/sexual-health", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454c_sex.jpg" },
+    { label: "Regrow Hair", headline: "Fight back where it's thinning up top.", href: "/hair", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454b_hair.jpg" },
+    { label: "Anti-Aging", headline: "Glow up from the inside out.", href: "/daily-health", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454e_Skin.jpg" },
+    { label: "Daily Wellness", headline: "Your good days, on repeat.", href: "/daily-health", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454f_happy.jpg" },
+  ];
+
+  const defaultImage = "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a4549_banner-01.jpg";
+
+  return (
+    <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+      {/* Left - Image */}
+      <div className="relative rounded-2xl overflow-hidden aspect-[4/5] md:aspect-[3/4]">
+        {/* Default image */}
+        <img
+          src={defaultImage}
+          alt="Gold Your Day"
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+          style={{ opacity: activeTab === -1 ? 1 : 0 }}
+        />
+        {/* Tab images */}
+        {tabs.map((tab, i) => (
+          <img
+            key={i}
+            src={tab.image}
+            alt={tab.label}
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+            style={{ opacity: activeTab === i ? 1 : 0 }}
+          />
+        ))}
+        {/* Blurred text overlay */}
+        <div className="absolute inset-0 flex items-end">
+          <div className="w-full p-6 md:p-8 bg-gradient-to-t from-black/60 via-black/20 to-transparent">
+            <p className="text-white text-lg md:text-2xl font-bold leading-tight" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+              {activeTab >= 0 ? tabs[activeTab].headline : "Gold Your Day"}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Right - Tabs */}
+      <div>
+        {/* Label */}
+        <div className="inline-flex items-center gap-2 border border-[#444444]/15 rounded-full px-4 py-1.5 mb-8">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="text-[#FFDD00]" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.6665 1.33073H10.3332C9.04651 1.33073 7.99984 2.3774 7.99984 3.66406V4.80073L5.90451 1.33006C5.66384 0.913396 5.23184 0.664062 4.75051 0.664062C4.26917 0.664062 3.83717 0.913396 3.59517 1.3314L0.180505 7.30673C-0.0614945 7.73006 -0.0601612 8.23473 0.184505 8.65673C0.429172 9.07873 0.866506 9.33073 1.35451 9.33073H3.52784C3.40184 9.7534 3.33317 10.2007 3.33317 10.6641C3.33317 13.2374 5.42717 15.3307 7.99984 15.3307C10.5725 15.3307 12.6665 13.2374 12.6665 10.6641C12.6665 10.2007 12.5985 9.7534 12.4718 9.33073H13.6665C14.9532 9.33073 15.9998 8.28406 15.9998 6.9974V3.66406C15.9998 2.3774 14.9532 1.33073 13.6665 1.33073Z" />
+          </svg>
+          <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Take Advantage</span>
+        </div>
+
+        {/* Tab links */}
+        <div className="flex flex-col gap-2 mb-8">
+          {tabs.map((tab, i) => (
+            <Link
+              key={tab.label}
+              href={tab.href}
+              onMouseEnter={() => setActiveTab(i)}
+              onMouseLeave={() => setActiveTab(-1)}
+              className="group block no-underline"
+              style={{ textDecoration: "none" }}
+            >
+              <div className={`py-3 md:py-4 border-b border-[#444444]/10 transition-all ${activeTab === i ? "pl-3" : ""}`}>
+                <h3
+                  className={`text-2xl md:text-4xl font-bold transition-colors no-underline ${activeTab === i ? "text-[#FFDD00]" : "text-[#444444]"} group-hover:text-[#FFDD00]`}
+                  style={{ fontFamily: "var(--font-oswald), sans-serif", textDecoration: "none" }}
+                >
+                  {tab.label}
+                </h3>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* CTA button */}
+        <Link href="/login">
+          <Button size="lg" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] text-sm px-10 py-6 font-bold rounded-lg uppercase tracking-wider" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+            Get Started
+          </Button>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Testimonial Slider (refills.com style) ─── */
+function TestimonialSlider() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -340 : 340,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const testimonials = [
+    { name: "Antonia", result: "Lost 32 lbs in 4 months", quote: "Gold Peptides changed my life. The process was so easy and the results speak for themselves. I finally feel confident in my own skin again." },
+    { name: "Jacob", result: "Lost 28 lbs in 3 months", quote: "I was skeptical at first, but the doctors were incredible. They tailored everything to my needs and the weight just started coming off." },
+    { name: "Mireya", result: "Lost 45 lbs in 6 months", quote: "After trying every diet out there, Gold Peptides was the first thing that actually worked. My energy levels are through the roof." },
+    { name: "Cindy", result: "Lost 22 lbs in 2 months", quote: "The convenience of having everything delivered to my door made all the difference. No more pharmacy trips or waiting rooms." },
+    { name: "Illiana", result: "Lost 38 lbs in 5 months", quote: "My doctor was amazed at my progress. Gold Peptides gave me the tools and support I needed to finally take control of my health." },
+    { name: "Robert", result: "Lost 50 lbs in 7 months", quote: "As a busy dad, I needed something that fit my lifestyle. Gold Peptides made it simple — just follow the plan and watch the results." },
+    { name: "Hannah", result: "Lost 19 lbs in 2 months", quote: "I love that everything is personalized. It's not a one-size-fits-all approach. My plan was designed specifically for me." },
+    { name: "Mary", result: "Lost 41 lbs in 5 months", quote: "The customer support team is amazing. They answered all my questions and made me feel comfortable every step of the way." },
+    { name: "Daryl", result: "Lost 35 lbs in 4 months", quote: "I've tried other telehealth services before but none compare to Gold Peptides. The quality of care is unmatched." },
+    { name: "Jessica", result: "Lost 27 lbs in 3 months", quote: "Shipping was fast, the medication worked great, and I never had to leave my house. This is the future of healthcare." },
+    { name: "Sarah", result: "Lost 30 lbs in 4 months", quote: "Gold Peptides helped me get my confidence back. I'm more active, more social, and happier than I've been in years." },
+  ];
+
+  return (
+    <div className="relative">
+      {/* Navigation arrows */}
+      <button
+        onClick={() => scroll("left")}
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-2.5 -ml-4 hidden md:flex items-center justify-center"
+      >
+        <ChevronLeft className="h-5 w-5 text-[#444444]" />
+      </button>
+      <button
+        onClick={() => scroll("right")}
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-2.5 -mr-4 hidden md:flex items-center justify-center"
+      >
+        <ChevronRight className="h-5 w-5 text-[#444444]" />
+      </button>
+
+      {/* Scrollable testimonial cards */}
+      <div
+        ref={scrollRef}
+        className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
+        {testimonials.map((t, i) => (
+          <div key={i} className="min-w-[300px] max-w-[300px] snap-start">
+            <div className="bg-[#FFFEF0] rounded-xl border border-[#444444]/10 p-6 h-full flex flex-col">
+              {/* Star rating */}
+              <div className="flex gap-0.5 mb-3">
+                {[...Array(5)].map((_, s) => (
+                  <svg key={s} className="w-4 h-4 text-[#FFDD00]" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              {/* Quote */}
+              <p className="text-[#444444]/70 text-sm leading-relaxed flex-1 mb-4">&ldquo;{t.quote}&rdquo;</p>
+              {/* Author */}
+              <div className="border-t border-[#444444]/10 pt-3">
+                <p className="font-bold text-[#444444] text-sm" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{t.name}</p>
+                <p className="text-xs text-[#FFDD00] font-bold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{t.result}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════════════════
    HOMEPAGE
    Section order matches refills.com layout
@@ -354,117 +518,117 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══ 5. LIFESTYLE SECTIONS ═══ */}
-      <section>
-        {[
-          { headline: "Shed the extra, feel extra good", category: "Weight Loss", href: "/weight-loss" },
-          { headline: "Fight back where it's thinning up top", category: "Hair Growth", href: "/hair" },
-          { headline: "Turn up the heat — naturally", category: "Better Intimacy", href: "/sexual-health" },
-          { headline: "Less stress, more yes", category: "Daily Health", href: "/daily-health" },
-        ].map((block, i) => (
-          <Link key={block.headline} href={block.href} className="group block">
-            <div className={`relative bg-[#FFFEF0] ${i > 0 ? "border-t border-[#444444]/10" : ""}`}>
-              <div className="container mx-auto px-4 py-20 md:py-28">
-                <div className={`max-w-2xl ${i % 2 !== 0 ? "ml-auto text-right" : ""}`}>
-                  <p className="text-xs text-[#FFDD00] font-semibold tracking-wider uppercase mb-3" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{block.category}</p>
-                  <h2 className="text-3xl md:text-5xl font-bold text-[#444444] leading-tight group-hover:text-[#FFDD00] transition-colors" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-                    {block.headline}
-                  </h2>
+      {/* ═══ 5. BLURRED TABS SECTION ═══ */}
+      <section className="py-16 md:py-24 bg-[#FFFEF0]">
+        <div className="container mx-auto px-4">
+          <BlurredTabs />
+        </div>
+      </section>
+
+      {/* ═══ 6. DERMATOLOGIST / BENEFITS BENTO GRID ═══ */}
+      <section className="py-16 md:py-24 bg-[#FFFEF0]">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[200px] md:auto-rows-[260px]">
+            {/* 1. Clinically Prescribed - tall left */}
+            <div className="relative rounded-2xl overflow-hidden row-span-2 group">
+              <img src="https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a4587_doctor.jpg" alt="Licensed Professionals" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+              <div className="absolute inset-0 flex flex-col justify-between p-5 md:p-7">
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Clinically Prescribed By Licensed Professionals</h3>
+                  <p className="text-white/70 text-sm mt-2">Free care and support from licensed providers nationwide.</p>
+                </div>
+                <Link href="/login">
+                  <Button className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] font-bold text-sm px-6 py-5 rounded-lg uppercase tracking-wider w-fit" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Get Started</Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* 2. 20% Weight Loss */}
+            <div className="relative rounded-2xl overflow-hidden group">
+              <img src="https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454a_Weight-Loss.jpg" alt="Weight Loss Results" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+              <div className="absolute inset-0 flex items-end p-5 md:p-6">
+                <h3 className="text-lg md:text-2xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>20% Weight<br />Loss In One Year</h3>
+              </div>
+            </div>
+
+            {/* 3. Never Pay Memberships */}
+            <div className="relative rounded-2xl overflow-hidden group">
+              <img src="https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454f_happy.jpg" alt="No Memberships" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+              <div className="absolute inset-0 flex items-end p-5 md:p-6">
+                <h3 className="text-lg md:text-2xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Never Pay for Monthly Memberships or App Fees</h3>
+              </div>
+            </div>
+
+            {/* 4. All Dosages Same Price */}
+            <div className="relative rounded-2xl overflow-hidden group">
+              <img src="https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454e_Skin.jpg" alt="Same Low Price" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+              <div className="absolute inset-0 flex items-end p-5 md:p-6">
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>All Dosages at the Same Low Price</h3>
+                  <p className="text-white/70 text-xs mt-1">We don&apos;t charge you based on dosage changes.</p>
                 </div>
               </div>
             </div>
-          </Link>
-        ))}
-      </section>
 
-      {/* ═══ 6. "GOLD YOUR DAY" CTA ═══ */}
-      <section className="relative bg-[#FFFEF0] border-t border-[#444444]/10 py-20 md:py-28">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-6xl font-bold text-[#444444] mb-8" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-            Gold Your Day
-          </h2>
-          <div className="flex flex-wrap justify-center gap-3 md:gap-5 mb-10">
-            {[
-              { label: "Lose Weight", href: "/weight-loss" },
-              { label: "Perform Better", href: "/sexual-health" },
-              { label: "Regrow Hair", href: "/hair" },
-              { label: "Anti-Aging", href: "/daily-health" },
-              { label: "Daily Wellness", href: "/daily-health" },
-            ].map((link) => (
-              <Link key={link.label} href={link.href}>
-                <span className="inline-block border border-[#444444]/30 text-[#444444] hover:border-[#FFDD00] hover:text-[#FFDD00] transition-colors rounded-full px-6 py-2.5 text-sm font-semibold" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-                  {link.label}
-                </span>
-              </Link>
-            ))}
-          </div>
-          <Link href="/login">
-            <Button size="lg" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] text-lg px-10 py-6 font-bold rounded-lg" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-              Get Started
-            </Button>
-          </Link>
-        </div>
-      </section>
-
-      {/* ═══ 7. KEY STATS / BENEFITS ═══ */}
-      <section className="py-16 md:py-24 bg-[#FFFEF0]">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-            Clinically Prescribed By{" "}
-            <span className="text-[#FFDD00]">Licensed Professionals</span>
-          </h2>
-          <p className="text-center text-[#444444]/60 mb-14 max-w-2xl mx-auto">
-            Your care team is committed to personalized support — from your first consultation to ongoing adjustments, your provider is with you every step of the way.
-          </p>
-
-          <div className="space-y-10">
-            {[
-              { title: "20% Weight Loss In One Year", desc: "Proven results with our personalized GLP-1 programs. Real patients, real outcomes." },
-              { title: "Never Pay for Monthly Memberships or App Fees", desc: "No app fees. No subscription traps. Just straightforward, affordable pricing." },
-              { title: "All Dosages at the Same Low Price", desc: "We don't penalize you for needing a higher dose. Every dosage costs the same." },
-              { title: "Free & Fast Shipping", desc: "Discreetly shipped to your front door at no additional cost." },
-              { title: "Free 24/7 Support with our Health Concierge", desc: "Our Health Concierge team is available around the clock to help you manage your goals." },
-            ].map((benefit, i) => (
-              <div key={i}>
-                <h3 className="text-2xl md:text-3xl font-bold text-[#444444] mb-2" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-                  {benefit.title}
-                </h3>
-                <p className="text-[#444444]/60 text-base">
-                  {benefit.desc}
-                </p>
-                {i < 4 && <Separator className="mt-10 bg-[#444444]/10" />}
+            {/* 5. Free & Fast Shipping */}
+            <div className="relative rounded-2xl overflow-hidden group">
+              <img src="https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454d_anxiety.jpg" alt="Free Shipping" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+              <div className="absolute inset-0 flex items-end p-5 md:p-6">
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Free &amp; Fast Shipping</h3>
+                  <p className="text-white/70 text-xs mt-1">Discreet, and quickly shipped to your front door</p>
+                </div>
               </div>
-            ))}
-          </div>
+            </div>
 
-          <div className="text-center mt-14">
-            <Link href="/login">
-              <Button size="lg" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] text-lg px-10 py-6 font-bold rounded-lg" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-                Get Started
-              </Button>
-            </Link>
+            {/* 6. 24/7 Support - tall right */}
+            <div className="relative rounded-2xl overflow-hidden row-span-2 col-start-2 md:col-start-3 row-start-1 group hidden md:block">
+              <img src="https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a4549_banner-01.jpg" alt="Health Concierge" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+              <div className="absolute inset-0 flex flex-col justify-between p-5 md:p-7">
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Free 24/7 Support with our Health Concierge</h3>
+                  <p className="text-white/70 text-sm mt-2">Manage all your goals and prescriptions in one place.</p>
+                </div>
+                <Link href="/login">
+                  <Button className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] font-bold text-sm px-6 py-5 rounded-lg uppercase tracking-wider w-fit" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Get Started</Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* 6b. 24/7 Support - mobile (not tall) */}
+            <div className="relative rounded-2xl overflow-hidden group md:hidden col-span-2">
+              <img src="https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a4549_banner-01.jpg" alt="Health Concierge" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+              <div className="absolute inset-0 flex flex-col justify-end p-5">
+                <h3 className="text-lg font-bold text-white leading-tight" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Free 24/7 Support with our Health Concierge</h3>
+                <p className="text-white/70 text-xs mt-1">Manage all your goals and prescriptions in one place.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ═══ 8. TESTIMONIALS ═══ */}
-      <section className="py-16 md:py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 text-[#444444] uppercase tracking-wide" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-            Hear From Gold Peptides Customers
-          </h2>
-          <div className="space-y-2.5">
-            <TestimonialCard quote="Gold Peptides helped me get my energy back — I feel sharper, stronger, and finally excited to take on each day." name="Antonia" result="Lost 50 Pounds" />
-            <TestimonialCard quote="Thanks to Gold Peptides, I'm sleeping better, moving easier, and feeling like myself again." name="Jacob" result="Lost 80 Pounds" />
-            <TestimonialCard quote="Gold Peptides changed my relationship with food — no crash diets, no guilt, just steady, real progress." name="Mireya" result="Lost 52 Pounds" />
-            <TestimonialCard quote="I never thought I could stick to something — Gold Peptides made it easy and sustainable." name="Cindy" result="Lost 120 Pounds" />
-            <TestimonialCard quote="My clothes fit better, my joints don't ache anymore, and I actually look forward to being active!" name="Illiana" result="Lost 40 Pounds" />
-            <TestimonialCard quote="I lost 75 pounds with Gold Peptides and gained so much more — confidence, freedom, and better health." name="Robert" result="Lost 75 Pounds" />
-            <TestimonialCard quote="My blood pressure dropped, my stress went down, and my energy shot up — all thanks to Gold Peptides." name="Hannah" result="Lost 70 Pounds" />
-            <TestimonialCard quote="I used to feel stuck — now, with Gold Peptides, my health is moving in the right direction every single day." name="Mary" result="Lost 40 Pounds" />
-            <TestimonialCard quote="I'm not winded after climbing stairs anymore. That alone is worth everything Gold Peptides helped me achieve." name="Daryl" result="Lost 72 Pounds" />
-            <TestimonialCard quote="Every part of my life has improved — sleep, mood, energy. Gold Peptides made the difference." name="Sarah" result="Lost 40 Pounds" />
+      {/* ═══ 8. TESTIMONIALS SLIDER ═══ */}
+      <section className="py-16 md:py-20 bg-white border-t border-[#444444]/10">
+        <div className="container mx-auto px-4">
+          <Separator className="bg-[#444444]/10 mb-10" />
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <div className="inline-block border border-[#444444]/15 rounded-full px-4 py-1.5 mb-4">
+                <span className="text-xs font-semibold tracking-[0.15em] uppercase text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Why Gold Peptides</span>
+              </div>
+              <h2 className="text-2xl md:text-4xl font-bold text-[#444444]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+                Hear From Gold Peptides Customers
+              </h2>
+            </div>
           </div>
+          <TestimonialSlider />
         </div>
       </section>
 

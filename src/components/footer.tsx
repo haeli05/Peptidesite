@@ -64,10 +64,24 @@ export function Footer() {
 
         <Separator className="my-10 bg-white/10" />
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-white/30" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
-            &copy; GOLD PEPTIDES 2025, ALL RIGHTS RESERVED.
+        {/* Disclaimer */}
+        <div className="mb-10">
+          <p className="text-[11px] text-white/40 leading-relaxed">
+            <strong className="text-white/50">Disclaimer:</strong> The products offered on this website are not approved by the FDA for any specific medical condition. The information provided is for educational purposes only and is not intended as medical advice. Results may vary and are not guaranteed. All treatments are prescribed by licensed healthcare providers after an individual consultation. Compounded medications are prepared by state-licensed pharmacies and are not FDA-approved, though they are made with FDA-approved ingredients in FDA-registered facilities. Gold Peptides does not provide emergency medical services. If you are experiencing a medical emergency, call 911 immediately.
           </p>
+          <p className="text-[11px] text-white/40 leading-relaxed mt-3">
+            Gold Peptides is a telehealth platform that connects patients with independent, licensed healthcare providers. Gold Peptides does not itself provide medical or pharmacy services, and its role is limited to facilitating access to licensed providers and FDA-regulated pharmacies. All medical decisions are made by the treating provider. Compounded drugs are not FDA-approved but are prepared by pharmacies that are licensed and regulated by their respective state boards of pharmacy.
+          </p>
+        </div>
+
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex flex-col md:flex-row items-center gap-3">
+            <p className="text-xs text-white/30" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+              &copy; GOLD PEPTIDES 2025, ALL RIGHTS RESERVED.
+            </p>
+            <span className="hidden md:inline text-white/20">|</span>
+            <p className="text-[11px] text-white/30">Compounded in the USA</p>
+          </div>
           <div className="flex gap-4">
             <Link href="#" className="text-white/30 hover:text-[#FFDD00] transition-colors">
               <span className="sr-only">Facebook</span>
@@ -79,6 +93,12 @@ export function Footer() {
               <span className="sr-only">Instagram</span>
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12,2.16c3.2,0,3.58,0,4.85.07,3.25.15,4.77,1.69,4.92,4.92.06,1.27.07,1.65.07,4.85s0,3.58-.07,4.85c-.15,3.23-1.66,4.77-4.92,4.92-1.27.06-1.65.07-4.85.07s-3.58,0-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s0-3.58.07-4.85C2.38,3.92,3.9,2.38,7.15,2.23,8.42,2.18,8.8,2.16,12,2.16ZM12,0C8.74,0,8.33,0,7.05.07c-4.35.2-6.78,2.62-7,7C0,8.33,0,8.74,0,12s0,3.67.07,4.95c.2,4.36,2.62,6.78,7,7C8.33,24,8.74,24,12,24s3.67,0,4.95-.07c4.35-.2,6.78-2.62,7-7C24,15.67,24,15.26,24,12s0-3.67-.07-4.95c-.2-4.35-2.62-6.78-7-7C15.67,0,15.26,0,12,0Zm0,5.84A6.16,6.16,0,1,0,18.16,12,6.16,6.16,0,0,0,12,5.84ZM12,16a4,4,0,1,1,4-4A4,4,0,0,1,12,16ZM18.41,4.15a1.44,1.44,0,1,0,1.44,1.44A1.44,1.44,0,0,0,18.41,4.15Z"/>
+              </svg>
+            </Link>
+            <Link href="#" className="text-white/30 hover:text-[#FFDD00] transition-colors">
+              <span className="sr-only">TikTok</span>
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.74a8.18 8.18 0 004.76 1.52v-3.4a4.85 4.85 0 01-1-.17z"/>
               </svg>
             </Link>
           </div>
