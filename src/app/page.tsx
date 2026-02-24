@@ -175,26 +175,26 @@ export default function Home() {
     <main className="flex min-h-screen flex-col">
 
       {/* ═══ 1. HERO SECTION ═══ */}
-      <section className="relative bg-[#FFFEF0] pt-24 pb-52 md:pt-32 md:pb-64">
+      <section className="relative bg-[#FFFEF0] pt-32 pb-16 md:pt-44 md:pb-20">
         <div className="container mx-auto px-4 text-center">
           {/* Label pill */}
-          <div className="inline-flex items-center gap-2 border border-[#444444]/20 text-[#444444]/70 px-4 py-1.5 rounded-full mb-6">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <div className="inline-flex items-center gap-2.5 border border-[#444444]/15 text-[#444444]/70 px-5 py-2 rounded-full mb-8">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z"/>
-              <path d="M20 20V17C20 15.3431 18.6569 14 17 14H7C5.34315 14 4 15.3431 4 17V20H6V17C6 16.4477 6.44772 16 7 16H17C17.5523 16 18 16.4477 18 17V20H20Z"/>
-              <path d="M19 9H18V7H16V9H15V11H16V13H18V11H19V9Z"/>
+              <path d="M20 20V17C20 15.3431 18.6569 14 17 14H7C5.34315 14 4 15.3431 4 17V20"/>
+              <path d="M19 8V11M17.5 9.5H20.5"/>
             </svg>
-            <span className="text-xs font-medium" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Doctor-Trusted Care, Personalized for You</span>
+            <span className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Doctor-Trusted Care, Personalized for You</span>
           </div>
 
           {/* Main heading */}
-          <h1 className="text-2xl md:text-4xl font-bold text-[#444444] mb-3 leading-[1.2]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#444444] mb-8 leading-[1.1]" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
             Personalized GLP-1&apos;s<br />
-            <strong className="text-[#FFDD00]">40% Off</strong> Sale
+            40% Off Sale
           </h1>
 
           <Link href="/login">
-            <Button size="lg" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] text-base px-8 py-5 font-bold rounded-lg" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+            <Button size="lg" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] text-sm px-10 py-6 font-bold rounded-lg uppercase tracking-wider" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
               Get Started
             </Button>
           </Link>
@@ -202,7 +202,7 @@ export default function Home() {
       </section>
 
       {/* ═══ 1b. FEATURE TILES ═══ */}
-      <section className="bg-[#FFFEF0] -mt-40 md:-mt-48 relative z-10">
+      <section className="bg-[#FFFEF0] pb-4">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10">
             <div className="flex flex-col items-center text-center gap-2 py-4">
@@ -241,7 +241,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* ═══ 2. CATEGORY CARDS (overlapping into hero) ═══ */}
+          {/* ═══ 2. CATEGORY CARDS ═══ */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
             {[
               { title: "Weight Loss", subtitle: "Achieve your weight loss Goals", href: "/weight-loss", gradient: "from-[#4a4a4a] to-[#2a2a2a]" },
@@ -250,7 +250,7 @@ export default function Home() {
               { title: "Hair Growth", subtitle: "Lasting solutions for fuller hair", href: "/hair", gradient: "from-[#4a4a4a] to-[#2a2a2a]" },
             ].map((cat) => (
               <Link key={cat.title} href={cat.href} className="group">
-                <div className={`relative rounded-xl overflow-hidden h-[280px] md:h-[420px] bg-gradient-to-b ${cat.gradient} flex flex-col justify-end p-5 md:p-7 transition-all group-hover:shadow-2xl shadow-lg`}>
+                <div className={`relative rounded-2xl overflow-hidden h-[320px] md:h-[460px] bg-gradient-to-b ${cat.gradient} flex flex-col justify-end p-5 md:p-7 transition-all group-hover:shadow-2xl shadow-lg`}>
                   <div className="absolute inset-0 bg-[#FFDD00]/0 group-hover:bg-[#FFDD00]/5 transition-all duration-300" />
                   <h3 className="text-lg md:text-2xl font-bold text-white mb-1 relative z-10" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{cat.title}</h3>
                   <p className="text-[11px] md:text-sm text-white/50 relative z-10">{cat.subtitle}</p>

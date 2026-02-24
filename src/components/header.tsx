@@ -192,9 +192,9 @@ export function Header() {
   }, []);
 
   return (
-    <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-[#444444]/95 backdrop-blur border-b border-white/10" : "bg-transparent"}`}>
+    <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-[#444444]/95 backdrop-blur" : "bg-transparent"}`}>
       {bannerVisible && <PromoBanner onClose={() => setBannerVisible(false)} />}
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 border-b border-[#444444]/10">
         <Link href="/" className="flex items-center space-x-2">
           <span className="text-2xl font-bold text-[#FFDD00] tracking-wide" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>GOLD PEPTIDES</span>
         </Link>
