@@ -71,21 +71,21 @@ function ProductCarousel() {
   };
 
   const products = [
-    { category: "Weight Loss", name: "Personalized GLP-1", type: "Injectable", badge: "40% OFF", href: "/weight-loss" },
-    { category: "Weight Loss", name: "Ozempic", type: "Injectable", href: "/weight-loss" },
-    { category: "Weight Loss", name: "Zepbound", type: "Injectable", href: "/weight-loss" },
-    { category: "Weight Loss", name: "Wegovy", type: "Injectable", href: "/weight-loss" },
-    { category: "Weight Loss", name: "Saxenda", type: "Injectable", href: "/weight-loss" },
-    { category: "Better Intimacy", name: "Tadalafil", type: "Pill", href: "/sexual-health" },
-    { category: "Better Intimacy", name: "Sildenafil", type: "Pill", href: "/sexual-health" },
-    { category: "Better Intimacy", name: "Cialis", type: "Pill", href: "/sexual-health" },
-    { category: "Better Intimacy", name: "Viagra", type: "Pill", href: "/sexual-health" },
-    { category: "Daily Health", name: "NAD+", type: "Injectable", href: "/daily-health" },
-    { category: "Daily Health", name: "Sermorelin", type: "Injectable", href: "/daily-health" },
-    { category: "Daily Health", name: "Methylene Blue", type: "Pill", href: "/daily-health" },
-    { category: "Hair", name: "Finasteride", type: "Pill", href: "/hair" },
-    { category: "Hair", name: "Oral Minoxidil", type: "Pill", href: "/hair" },
-    { category: "Hair", name: "Finasteride & Minoxidil Spray", type: "Spray", href: "/hair" },
+    { category: "Weight Loss", name: "Personalized GLP-1", type: "Injectable", badge: "40% OFF", href: "/weight-loss", explore: "/weight-loss", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a45bf_personal.png" },
+    { category: "Weight Loss", name: "Ozempic", type: "Injectable", href: "/weight-loss/ozempic", explore: "/weight-loss/ozempic", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a4574_66fb634a698ef6d6163eb2f9_Ozempic_20Product_20Card.png" },
+    { category: "Weight Loss", name: "Zepbound", type: "Injectable", href: "/weight-loss/zepbound", explore: "/weight-loss/zepbound", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a4575_66fb633016ae048b2c8e17b4_Zepbound_20Product_20Card.png" },
+    { category: "Weight Loss", name: "Wegovy", type: "Injectable", href: "/weight-loss/wegovy", explore: "/weight-loss/wegovy", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/690b7e1518318e20ccb096d4_Wegovy-Product-Image.png" },
+    { category: "Weight Loss", name: "Saxenda", type: "Injectable", href: "/weight-loss/saxenda", explore: "/weight-loss/saxenda", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/690b7e471bd57942fb417c07_Saxenda-Product-IMage.png" },
+    { category: "Better Intimacy", name: "Tadalafil", type: "Pill", href: "/sexual-health/tadalafil", explore: "/sexual-health/tadalafil", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a453f_Pill-02.png" },
+    { category: "Better Intimacy", name: "Sildenafil", type: "Pill", href: "/sexual-health/sildenafil", explore: "/sexual-health/sildenafil", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/6837545da3f8a696dfc0c176_Centered.png" },
+    { category: "Better Intimacy", name: "Cialis", type: "Pill", href: "/sexual-health/cialis", explore: "/sexual-health/cialis", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683754d8dc5100b37fb149ba_Cialis-Centered.png" },
+    { category: "Better Intimacy", name: "Viagra", type: "Pill", href: "/sexual-health/viagra", explore: "/sexual-health/viagra", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683755076ab8d6d4a3185e7d_Viagra-Centered.png" },
+    { category: "Daily Health", name: "NAD+", type: "Injectable", href: "/daily-health/nad-injections", explore: "/daily-health/nad-injections", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a45b5_NAD.png" },
+    { category: "Daily Health", name: "Sermorelin", type: "Injectable", href: "/daily-health/sermorelin", explore: "/daily-health/sermorelin", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a45b6_Sermorelin.png" },
+    { category: "Daily Health", name: "Methylene Blue", type: "Pill", href: "/daily-health/methylene-blue", explore: "/daily-health/methylene-blue", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/6837553924148ddb0b5cf68b_Meth-centered.png" },
+    { category: "Hair", name: "Finasteride", type: "Pill", href: "/hair/finasteride", explore: "/hair/finasteride", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/68375567d89a7b474e8dccde_Finasteride-Centered.png" },
+    { category: "Hair", name: "Oral Minoxidil", type: "Pill", href: "/hair/oral-minoxidil", explore: "/hair/oral-minoxidil", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/6837559550597dda41065c07_Oral-Centered.png" },
+    { category: "Hair", name: "Finasteride & Minoxidil Spray", type: "Spray", href: "/hair/finasteride-minoxidil-spray", explore: "/hair/finasteride-minoxidil-spray", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683760e0ea32d2ef21c6025b_Refills-Bottle-Product.png" },
   ];
 
   return (
@@ -109,28 +109,36 @@ function ProductCarousel() {
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {products.map((product, index) => (
-          <div key={index} className="min-w-[260px] max-w-[260px] snap-start">
-            <Card className="h-full hover:shadow-lg transition-shadow border border-transparent hover:border-[#FFDD00]/40 bg-white">
-              <CardHeader className="pb-2">
-                <div className="flex justify-between items-start">
-                  <Badge variant="outline" className="text-[10px] font-semibold uppercase tracking-wide">{product.category}</Badge>
-                  {product.badge && <Badge className="bg-[#EF4049] text-white text-[10px] font-bold">{product.badge}</Badge>}
+          <div key={index} className="min-w-[280px] max-w-[280px] snap-start">
+            <div
+              className="relative rounded-2xl overflow-hidden h-[480px] flex flex-col justify-between p-5 group"
+              style={{ backgroundImage: `url(${product.image})`, backgroundSize: "cover", backgroundPosition: "50% 0" }}
+            >
+              {/* Top - Labels */}
+              <div className="flex flex-col gap-2">
+                {product.badge && (
+                  <div className="self-start bg-[#EF4049] text-white text-xs font-bold px-3 py-1 rounded-md" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>
+                    {product.badge}
+                  </div>
+                )}
+                <div className="flex gap-2">
+                  <span className="bg-white/90 text-[#444444] text-[10px] font-semibold uppercase tracking-wide px-2.5 py-1 rounded-md">{product.category}</span>
+                  <span className="bg-[#444444]/80 text-white text-[10px] font-semibold px-2.5 py-1 rounded-md">In Stock</span>
                 </div>
-                <p className="text-[11px] text-green-600 font-semibold mt-1">In Stock</p>
-                <CardTitle className="text-base mt-1.5" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{product.name}</CardTitle>
-              </CardHeader>
-              <CardContent className="pb-3">
-                <p className="text-xs text-muted-foreground">{product.type}</p>
-              </CardContent>
-              <CardFooter className="gap-2 pt-0">
+                <h3 className="text-lg font-bold text-[#444444] mt-1" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>{product.name}</h3>
+                <p className="text-sm text-[#444444]/70">{product.type}</p>
+              </div>
+
+              {/* Bottom - Buttons */}
+              <div className="flex gap-2">
                 <Link href={product.href} className="flex-1">
-                  <Button size="sm" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] w-full font-bold text-xs" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Get Started</Button>
+                  <Button size="sm" className="bg-[#FFDD00] hover:bg-[#FFD700] text-[#444444] w-full font-bold text-xs rounded-lg py-5" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Get Started</Button>
                 </Link>
-                <Link href={product.href} className="flex-1">
-                  <Button size="sm" variant="outline" className="w-full font-semibold text-xs" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Explore</Button>
+                <Link href={product.explore} className="flex-1">
+                  <Button size="sm" variant="outline" className="w-full font-semibold text-xs bg-white hover:bg-white/90 border-[#444444]/20 rounded-lg py-5" style={{ fontFamily: "var(--font-oswald), sans-serif" }}>Explore</Button>
                 </Link>
-              </CardFooter>
-            </Card>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -423,7 +431,7 @@ export default function Home() {
             {[
               { title: "Weight Loss", subtitle: "Achieve your weight loss Goals", href: "/weight-loss", video: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a45f6_shutterstock_1109870429-transcode.mp4", poster: "https://cdn.prod.website-files.com/680837d163525d9ff4a44785/682e68c3383995b5be5d2553_shutterstock_1109870429-poster-00001.jpg", image: "" },
               { title: "Better Intimacy", subtitle: "Gain Confidence and Last Longer", href: "/sexual-health", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a4538_sexual.jpg" },
-              { title: "Daily Health", subtitle: "Become the Best version of yourself", href: "/daily-health", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454d_anxiety.jpg" },
+              { title: "Daily Health", subtitle: "Become the Best version of yourself", href: "/daily-health", video: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a45f7_shutterstock_3417634001-transcode.mp4", poster: "https://cdn.prod.website-files.com/680837d163525d9ff4a44785/682e68cb37e18b31522dbe00_shutterstock_3417634001-poster-00001.jpg", image: "" },
               { title: "Hair Growth", subtitle: "Lasting solutions for fuller hair", href: "/hair", image: "https://cdn.prod.website-files.com/683079b098a24bdd710a41e6/683079b098a24bdd710a454b_hair.jpg" },
             ].map((cat) => (
               <Link key={cat.title} href={cat.href} className="group">

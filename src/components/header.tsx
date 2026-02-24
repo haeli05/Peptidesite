@@ -97,7 +97,7 @@ const navDropdowns = [
     href: "/weight-loss",
     items: [
       { title: "View All Weight Loss Products", href: "/weight-loss", featured: true },
-      { title: "Personalized GLP-1", href: "/weight-loss/personalized-glp-1" },
+      { title: "Personalized GLP-1", href: "/weight-loss" },
       { title: "Zepbound", href: "/weight-loss/zepbound" },
       { title: "Ozempic", href: "/weight-loss/ozempic" },
       { title: "Wegovy", href: "/weight-loss/wegovy" },
